@@ -1,33 +1,100 @@
+// 01_portrait Assignment
+// CSC-496 Computational Art 
+
+
+// Create array to hold objects
 let face = [];
+
 
 function setup() {
 	createCanvas(600, 600);
 	background(100);
 	angleMode(DEGREES);
 	colorMode(HSB, 360, 100, 100, 100);
-	frameRate(4);
+	frameRate(5);
 }
 
 function draw() {
-	clear();
+
+	// set background
 	background(0);
 	fill(180,70,80);
 	rect(0,0,width,height);
 	
 	
-	Initialization();
+	// function is responsible for generating all of the dot objects
+	dotProduction();
+
+	// go through the array of objects and display each one
 	for (let i = 0; i < face.length; i++) {
 		face[i].display();
 	}
+
+	// remove all objects from the array, they will be generated at a new random position
+	// with the next draw iteration
 	face.splice(0, face.length); 
-	print(face);
 }
 
-function Initialization(){
+
+// creates a single dot
+// give parameters for the potential circular area a dot can be spawned in and the color of the dot
+class Feature {
+
+	constructor(x, y, size, maxWidth, maxHeight, hMin, hMax, sMin, sMax, bMin, bMax, percentMarg, alpha = 100) {
+
+		// Center coordinates of the face
+		this.centerX = x + 100;
+		this.centerY = y + 100;
+
+		// Size of dot
+		this.size = size;
+
+		// Randomly generated values for circular positioning
+		this.angle = random(0, 360);
+		this.ampX = random(1, maxWidth);
+		this.ampY = random(1, maxHeight);
+
+		// Calculate x and y position with sine and cosine
+		this.x = this.centerX + this.ampX * cos(this.angle);
+		this.y = this.centerY + this.ampY * sin(this.angle);
+
+		// Percentage calculated based on position comapred to total range of x and y 
+		this.percentX = this.ampX / maxWidth;
+		this.percentY = this.ampY / maxHeight;
+
+		// Calculate hue value
+		this.hue = random(hMin, hMax)
+
+		// transparency value
+		this.alpha = alpha;
+
+		// Determines saturation and brightness based on position of x and y from center of face
+		if (this.percentX > percentMarg && this.percentY > percentMarg) {
+			this.sat = random(sMin + 5, sMax + 10);
+			this.bright = random(bMin - 10, bMax - 10);
+		} else {
+			this.sat = random(sMin, sMax)
+			this.bright = random(bMin, bMax)
+		}
+
+	}
+
+	// displays the dot given the constructor parameters
+	display() {
+		noStroke();
+		fill(this.hue, this.sat, this.bright, this.alpha);
+		ellipse(this.x, this.y, this.size, this.size);
+	}
+
+}
+
+
+// responsible for generating the 48000 dot objects in the sketch
+function dotProduction(){
 	
 	// background
-	for (let i = 0; i < 2500; i++){
-		face.push(new Feature(200, 200, 50,600,600,160,200,60,80,70,90));
+	for (let i = 0; i < 4000; i++){
+		face.push(new Feature(200, 200, 20,600,600,160,200,60,80,70,90));
 	}
 	
 	// hair 
@@ -134,7 +201,7 @@ function Initialization(){
 
 	// nose bulb highlight
 	for (let i = 0; i < 100; i++) {
-		face.push(new Feature(200, 235, 5, 15, 10, 20, 35, 30, 20, 95, 100, 1));
+		face.push(new Feature(200, 235, 5, 15, 10, 20, 35, 20, 30, 95, 100, 1));
 		face.push(new Feature(180, 232, 3, 5, 7, 10, 35, 15, 20, 93, 98, 1));
 		face.push(new Feature(220, 232, 3, 5, 7, 10, 35, 15, 20, 93, 98, 1));
 	}
@@ -149,9 +216,9 @@ function Initialization(){
 
 
 	// nostrils
-	for (let i = 0; i < 60; i++) {
-		face.push(new Feature(186, 245, 2, 5, 2, 10, 35, 20, 40, 30, 40, 1));
-		face.push(new Feature(214, 245, 2, 5, 2, 10, 35, 20, 40, 30, 40, 1));
+	for (let i = 0; i < 75; i++) {
+		face.push(new Feature(186, 245, 2, 5, 1, 10, 35, 20, 40, 30, 40, 1,10));
+		face.push(new Feature(214, 245, 2, 5, 1, 10, 35, 20, 40, 30, 40, 1, 10));
 	}
 	
 	// cupids bow contour
@@ -164,16 +231,11 @@ function Initialization(){
 		face.push(new Feature(200,260,2,3,7, 20, 35, 15, 20, 95, 100, 0.9))
 	}
 	
-	// cheek contour
-	for (let i = 0; i < 20; i++){
-		face.push(new Feature(120, 240, 10, 11, 25, 25, 35, 25, 40, 85, 95, 0.85));
-		face.push(new Feature(280, 240, 10, 11, 25, 25, 35, 25, 40, 85, 95, 0.85));
-	}
 	
 	// cheek blush
-	for (let i = 0; i < 55; i++){
-		face.push(new Feature(140, 220, 7, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 10));
-		face.push(new Feature(260, 220, 7, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 10));
+	for (let i = 0; i < 7; i++){
+		face.push(new Feature(140, 220, 25, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 10));
+		face.push(new Feature(260, 220, 25, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 10));
 	}
 	
 	// front hair strands
@@ -188,51 +250,5 @@ function Initialization(){
 
 }
 
-class Feature {
 
-	constructor(x, y, size, maxWidth, maxHeight, hMin, hMax, sMin, sMax, bMin, bMax, percentMarg, alpha = 100) {
-
-		this.alpha = alpha;
-		// Center coordinates of the face
-		this.centerX = x + 100;
-		this.centerY = y + 100;
-
-		// Size of dot
-		this.size = size;
-
-		// Randomly generated values for circular positioning
-		this.angle = random(0, 360);
-		this.ampX = random(1, maxWidth);
-		this.ampY = random(1, maxHeight);
-
-		// Calculate x and y position with sine and cosine
-		this.x = this.centerX + this.ampX * cos(this.angle);
-		this.y = this.centerY + this.ampY * sin(this.angle);
-
-		// Percentage calculated based on position comapred to total range of x and y 
-		this.percentX = this.ampX / maxWidth;
-		this.percentY = this.ampY / maxHeight;
-
-		// Calculate hue value
-		this.hue = random(hMin, hMax)
-
-		// Determines saturation and brightness based on position of x and y from center of face
-		if (this.percentX > percentMarg && this.percentY > percentMarg) {
-			this.sat = random(sMin + 5, sMax + 10);
-			this.bright = random(bMin - 10, bMax - 10);
-		} else {
-			this.sat = random(sMin, sMax)
-			this.bright = random(bMin, bMax)
-		}
-
-	}
-
-  
-	display() {
-		noStroke();
-		fill(this.hue, this.sat, this.bright, this.alpha);
-		ellipse(this.x, this.y, this.size, this.size);
-	}
-
-}
 
