@@ -11,7 +11,7 @@ function setup() {
 	background(100);
 	angleMode(DEGREES);
 	colorMode(HSB, 360, 100, 100, 100);
-	frameRate(5);
+	frameRate(60);
 }
 
 function draw() {
@@ -93,7 +93,7 @@ function dotProduction(){
 	
 	// background
 	for (let i = 0; i < 7000; i++){
-		face.push(new Feature(200, 200, 20,600,600,160,200,60,80,70,90));
+		face.push(new Feature(200, 200, 20,600,600,170,200,60,80,70,90));
 	}
 	
 	// hair 
