@@ -11,7 +11,7 @@ function setup() {
 	background(100);
 	angleMode(DEGREES);
 	colorMode(HSB, 360, 100, 100, 100);
-	frameRate(60);
+	frameRate(20);
 }
 
 function draw() {
