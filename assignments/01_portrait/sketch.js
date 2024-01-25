@@ -1,6 +1,6 @@
 // 01_portrait Assignment
 // CSC-496 Computational Art 
-
+// This program draws a self portrait of me out of dots.
 
 // Create array to hold objects
 let face = [];
@@ -20,7 +20,6 @@ function draw() {
 	background(0);
 	fill(180,70,80);
 	rect(0,0,width,height);
-	
 	
 	// function is responsible for generating all of the dot objects
 	dotProduction();
@@ -62,7 +61,7 @@ class Feature {
 		this.percentX = this.ampX / maxWidth;
 		this.percentY = this.ampY / maxHeight;
 
-		// Calculate hue value
+		// Generate hue value
 		this.hue = random(hMin, hMax)
 
 		// transparency value
@@ -89,11 +88,11 @@ class Feature {
 }
 
 
-// responsible for generating the 48000 dot objects in the sketch
+// responsible for generating the 50000 dot objects in the sketch
 function dotProduction(){
 	
 	// background
-	for (let i = 0; i < 4000; i++){
+	for (let i = 0; i < 7000; i++){
 		face.push(new Feature(200, 200, 20,600,600,160,200,60,80,70,90));
 	}
 	
@@ -125,12 +124,12 @@ function dotProduction(){
 		face.push(new Feature(200, 200, 15, 90, 125, 25, 35, 25, 40, 95, 100, 0.95));
 	}
 	
-	// front hair 
+	// hair over shirt
 	for (let i = 0; i < 500; i++){
 		face.push(new Feature(100, 350, 10, 45, 100, 20, 30, 60, 80, 30, 40, 0.8));
 		face.push(new Feature(300, 350, 10, 45, 100, 20, 30, 60, 80, 30, 40, 0.8));
-		face.push(new Feature(100, 450, 10, 45, 100, 20, 30, 60, 80, 40, 55, 0.8));
-		face.push(new Feature(300, 450, 10, 45, 100, 20, 30, 60, 80, 40, 55, 0.8));
+		face.push(new Feature(100, 450, 10, 45, 100, 20, 30, 60, 80, 25, 45, 0.8));
+		face.push(new Feature(300, 450, 10, 45, 100, 20, 30, 60, 80, 25, 45, 0.8));
 
 	}
 
@@ -209,8 +208,8 @@ function dotProduction(){
 	// lips
 	for (let i = 0; i < 500; i++) {
 		face.push(new Feature(200, 277, 2, 40, 8, 0, 20, 40, 60, 85, 90, 0.75));
-		face.push(new Feature(190, 275, 2, 10, 5, 0, 20, 40, 60, 85, 90, 0.75));
-		face.push(new Feature(210, 275, 2, 10, 5, 0, 20, 40, 60, 85, 90, 0.75));
+		face.push(new Feature(188, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75));
+		face.push(new Feature(212, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75));
 		face.push(new Feature(200, 277, 2, 40, 2, 0, 20, 40, 60, 65, 80, 0.75));
 	}
 
