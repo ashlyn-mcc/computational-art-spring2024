@@ -50,7 +50,7 @@ function draw() {
 // give parameters for the potential circular area a dot can be spawned in and the color of the dot
 class Feature {
 
-	constructor(x, y, size, maxWidth, maxHeight, hMin, hMax, sMin, sMax, bMin, bMax, percentMarg, alpha = 100, movement = 0) {
+	constructor(x, y, size, maxWidth, maxHeight, hMin, hMax, sMin, sMax, bMin, bMax, percentMarg, alpha = 100, movement = 0, moveFactor) {
 
 		this.maxWidth = maxWidth;
 		this.maxHeight = maxHeight;
@@ -78,7 +78,7 @@ class Feature {
 		this.x = this.centerX + this.ampX * cos(this.angle);
 		this.y = this.centerY + this.ampY * sin(this.angle);
 
-		this.initalY = this.y;
+		this.moveFactor = moveFactor;
 
 		// Percentage calculated based on position comapred to total range of x and y 
 		this.percentX = this.ampX / maxWidth;
@@ -110,7 +110,7 @@ class Feature {
 	// displays the dot given the constructor parameters
 	display() {
 		if (this.movement == 1){
-			this.value = mouseY/35
+			this.value = mouseY/this.moveFactor
 		}
 		noStroke();
 		fill(this.hue, this.sat, this.bright, this.alpha);
@@ -218,75 +218,75 @@ function dotProduction(){
 	
 	// eye lashes
 	for (let i = 0; i < 50; i++) {
-		face.push(new Feature(250, 170, 2, 22, 2, 25, 35, 25, 40, 0, 5, 1, 100, 1));
-		face.push(new Feature(150, 170, 2, 22, 2, 25, 35, 25, 40, 0, 5, 1, 100, 1));
+		face.push(new Feature(250, 170, 2, 22, 2, 25, 35, 25, 40, 0, 5, 1, 100, 1, 32));
+		face.push(new Feature(150, 170, 2, 22, 2, 25, 35, 25, 40, 0, 5, 1, 100, 1, 32));
 	}
 
 	// eye lids
 	for (let i = 0; i < 250; i++) {
-		face.push(new Feature(250, 160, 5, 30, 10, 25, 35, 25, 40, 90, 95, 0.85, 100, 1));
-		face.push(new Feature(150, 160, 5, 30, 10, 25, 35, 25, 40, 90, 95, 0.85, 100, 1));
+		face.push(new Feature(250, 160, 5, 30, 10, 25, 35, 25, 40, 90, 95, 0.85, 100, 1, 32));
+		face.push(new Feature(150, 160, 5, 30, 10, 25, 35, 25, 40, 90, 95, 0.85, 100, 1, 32));
 	}
 
 	// eyebrows
 	for (let i = 0; i < 200; i++) {
-		face.push(new Feature(250, 155, 3, 30, 5, 20, 30, 60, 100, 30, 50, 0.9));
-		face.push(new Feature(150, 155, 3, 30, 5, 20, 30, 60, 100, 30, 50, 0.9));
+		face.push(new Feature(250, 155, 3, 30, 5, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 250));
+		face.push(new Feature(150, 155, 3, 30, 5, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 250));
 	}
 	
 	for (let i = 0; i < 100; i++) {
-		face.push(new Feature(235, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9));
-		face.push(new Feature(175, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9));
+		face.push(new Feature(235, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 175));
+		face.push(new Feature(175, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 175));
 	}
 
 	// nose bridge contour
 	for (let i = 0; i < 150; i++) {
-		face.push(new Feature(185, 205, 5, 10, 35, 20, 35, 30, 35, 85, 100, 1));
-		face.push(new Feature(215, 205, 5, 10, 35, 20, 35, 30, 35, 85, 100, 1));
+		face.push(new Feature(185, 205, 5, 10, 35, 20, 35, 30, 35, 85, 100, 1, 100, 1, 250));
+		face.push(new Feature(215, 205, 5, 10, 35, 20, 35, 30, 35, 85, 100, 1, 100, 1, 250));
 	}
 
 	// nose bridge highlight	
 	for (let i = 0; i < 50; i++) {
-		face.push(new Feature(200, 205, 5, 8, 35, 20, 35, 15, 20, 95, 100, 1));
+		face.push(new Feature(200, 205, 5, 8, 35, 20, 35, 15, 20, 95, 100, 1, 100, 1, 250));
 	}
 
 	// nose bulb contour
 	for (let i = 0; i < 75; i++) {
-		face.push(new Feature(180, 235, 5, 15, 12, 20, 35, 25, 30, 80, 95, 0.8));
-		face.push(new Feature(220, 235, 5, 15, 12, 20, 35, 25, 30, 80, 95, 0.8));
-		face.push(new Feature(200, 235, 10, 15, 15, 15, 35, 25, 30, 85, 95, 0.9));
+		face.push(new Feature(180, 235, 5, 15, 12, 20, 35, 25, 30, 80, 95, 0.8, 100, 1, 250));
+		face.push(new Feature(220, 235, 5, 15, 12, 20, 35, 25, 30, 80, 95, 0.8, 100, 1, 250));
+		face.push(new Feature(200, 235, 10, 15, 15, 15, 35, 25, 30, 85, 95, 0.9, 100, 1, 250));
 	}
 
 	// nose bulb highlight
 	for (let i = 0; i < 100; i++) {
-		face.push(new Feature(200, 235, 5, 15, 10, 20, 35, 20, 30, 95, 100, 1));
-		face.push(new Feature(180, 232, 3, 5, 7, 10, 35, 15, 20, 93, 98, 1));
-		face.push(new Feature(220, 232, 3, 5, 7, 10, 35, 15, 20, 93, 98, 1));
+		face.push(new Feature(200, 235, 5, 15, 10, 20, 35, 20, 30, 95, 100, 1, 100, 1, 250));
+		face.push(new Feature(180, 232, 3, 5, 7, 10, 35, 15, 20, 93, 98, 1, 100, 1, 250));
+		face.push(new Feature(220, 232, 3, 5, 7, 10, 35, 15, 20, 93, 98, 1, 100, 1, 250));
 	}
 
 	// lips
 	for (let i = 0; i < 500; i++) {
-		face.push(new Feature(200, 277, 2, 40, 8, 0, 20, 40, 60, 85, 90, 0.75));
-		face.push(new Feature(188, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75));
-		face.push(new Feature(212, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75));
-		face.push(new Feature(200, 277, 2, 40, 2, 0, 20, 40, 60, 65, 80, 0.75));
+		face.push(new Feature(200, 277, 2, 40, 8, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 250));
+		face.push(new Feature(188, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 250));
+		face.push(new Feature(212, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 250));
+		face.push(new Feature(200, 277, 2, 40, 2, 0, 20, 40, 60, 65, 80, 0.75, 100, 1, 250));
 	}
 
 
 	// nostrils
 	for (let i = 0; i < 75; i++) {
-		face.push(new Feature(186, 245, 2, 5, 1, 10, 35, 20, 40, 30, 40, 1,10));
-		face.push(new Feature(214, 245, 2, 5, 1, 10, 35, 20, 40, 30, 40, 1, 10));
+		face.push(new Feature(186, 245, 2, 5, 1, 10, 35, 20, 40, 30, 40, 1, 10, 1, 250));
+		face.push(new Feature(214, 245, 2, 5, 1, 10, 35, 20, 40, 30, 40, 1, 10, 1, 250));
 	}
 	
 	// cupids bow contour
 	for (let i = 0; i < 150; i++){
-		face.push(new Feature(200,260,2,10,10, 20, 35, 30, 35, 87, 97, 0.9))
+		face.push(new Feature(200,260,2,10,10, 20, 35, 30, 35, 87, 97, 0.9, 100, 1, 250))
 	}
 	
 	// cupids bow highlight
 	for (let i = 0; i < 50; i++){
-		face.push(new Feature(200,260,2,3,7, 20, 35, 15, 20, 95, 100, 0.9))
+		face.push(new Feature(200,260,2,3,7, 20, 35, 15, 20, 95, 100, 0.9, 100, 1, 250))
 	}
 	
 	
