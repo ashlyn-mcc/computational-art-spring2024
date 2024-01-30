@@ -1,31 +1,37 @@
-// 01_portrait Assignment
+// 01_abstract Assignment
 // CSC-496 Computational Art 
 // This program draws a self portrait of me out of dots.
 
 // Create array to hold objects
 let face = [];
 let backgroundArray = [];
+let stars = [];
 
 function setup() {
 	createCanvas(600, 600);
 	background(100);
 	angleMode(DEGREES);
 	colorMode(HSB, 360, 100, 100, 100);
-	//frameRate(5);
-
+	//frameRate(20);
+	textAlign(CENTER, TOP);
+	textFont('Courier New');
 	// function is responsible for generating all of the dot objects
 	dotProduction();
+
+	for (let i = 0; i < 250; i++){
+		stars.push(new fallingStar(i * width/250));
+	}
 
 }
 
 function draw() {
-
+	console.log(frameRate());
 	if (mouseY > height){
 		mouseY = height;
 	}
 	// set background
-	background(0);
-	fill(180,70,80 - (mouseY/9));
+	background(100);
+	fill(180,70 - (mouseY/10),80 - (mouseY/7.5),100);
 	rect(0,0,width,height);
 	
 	backgroundGenerator(mouseY);
@@ -34,15 +40,24 @@ function draw() {
 		backgroundArray[i].display();
 	}
 
+	for(let i =0; i < stars.length; i++){
+		stars[i].display();
+	}
+
 	// go through the array of objects and display each one
 	for (let i = 0; i < face.length; i++) {
 		face[i].display();
 		face[i].randomize();
 	}
 
+	fill(180,0,80 - (mouseY/7.5),0 + (mouseY/20));
+	rect(0,0,width,height);
+
 	// remove all objects from the array, they will be generated at a new random position
 	// with the next draw iteration
 	backgroundArray.splice(0, backgroundArray.length); 
+
+
 }
 
 
@@ -144,10 +159,48 @@ class Feature {
 
 }
 
+class fallingStar{
+	constructor(xval){
+		this.x = xval;
+		this.y = random(-300,0);
+		this.initialY = this.y;
+		this.angle = 0;
+		this.rotation = random(5,25);
+		this.hue = random(165,200)
+		this.sat = random(15,100)
+		this.bright = random(75,100);
+		this.alpha = random(5,45);
+		this.alterVal = -1;
+		this.divisor = random(15,30);
+		this.size = random(2,17);
+		this.text = '';
+		this.strAmount = random(20,100);
+		for (let i = 0; i < this.strAmount; i++){
+			this.random = random(['0\n','1\n']);
+			this.text += this.random;
+		}
+	}
+
+	display(){
+		this.hueAlter = this.alterVal * (mouseY/this.divisor);
+		//console
+		this.angle += this.rotation;
+		if (this.y > height){
+			this.y = this.initialY;
+		} else {
+			this.y += this.rotation
+		}
+		textSize(this.size);
+		fill((this.hue + this.hueAlter),this.sat,this.bright,this.alpha);
+		text(this.text,this.x,this.y);
+	}
+
+}
+
 function backgroundGenerator(mouseValue){
 	// background
 	for (let i = 0; i < 7000; i++){
-		backgroundArray.push(new Feature(200, 200, 20,600,600,170,200,60,80,70 - (mouseValue/9),90- (mouseValue/9)));
+		backgroundArray.push(new Feature(200, 200, 20,600,600,170,200,60- (mouseValue/10),80- (mouseValue/10),70 - (mouseValue/7.5),90- (mouseValue/7.5),5));
 	}
 }
 
@@ -180,7 +233,7 @@ function dotProduction(){
 
 	// face
 	for (let i = 0; i < 10000; i++) {
-		face.push(new Feature(200, 200, 15, 90, 125, 25, 35, 25, 40, 95, 100, 0.95));
+		face.push(new Feature(200, 200, 15, 90, 125, 25, 35, 25, 40, 95, 100, 1, 100, 1, 250));
 	}
 	
 	// hair over shirt
@@ -235,8 +288,8 @@ function dotProduction(){
 	}
 	
 	for (let i = 0; i < 100; i++) {
-		face.push(new Feature(235, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 175));
-		face.push(new Feature(175, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 175));
+		face.push(new Feature(235, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 125));
+		face.push(new Feature(175, 155, 3, 12, 8, 20, 30, 60, 100, 30, 50, 0.9, 100, 1, 125));
 	}
 
 	// nose bridge contour
@@ -265,13 +318,15 @@ function dotProduction(){
 	}
 
 	// lips
-	for (let i = 0; i < 500; i++) {
-		face.push(new Feature(200, 277, 2, 40, 8, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 250));
-		face.push(new Feature(188, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 250));
-		face.push(new Feature(212, 273, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 250));
-		face.push(new Feature(200, 277, 2, 40, 2, 0, 20, 40, 60, 65, 80, 0.75, 100, 1, 250));
+	for (let i = 0; i < 50; i++) {
+		face.push(new Feature(188, 272, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 150));
+		face.push(new Feature(212, 272, 2, 5, 5, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 150));
 	}
 
+	for (let i = 0; i < 500; i++) {
+		face.push(new Feature(200, 277, 2, 40, 8, 0, 20, 40, 60, 85, 90, 0.75, 100, 1, 250));
+		face.push(new Feature(200, 277, 2, 40, 2, 0, 20, 40, 60, 65, 80, 0.75, 100, 1, 250));
+	}
 
 	// nostrils
 	for (let i = 0; i < 75; i++) {
@@ -291,9 +346,9 @@ function dotProduction(){
 	
 	
 	// cheek blush
-	for (let i = 0; i < 7; i++){
-		face.push(new Feature(140, 220, 25, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 10));
-		face.push(new Feature(260, 220, 25, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 10));
+	for (let i = 0; i < 10; i++){
+		face.push(new Feature(140, 220, 25, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 5));
+		face.push(new Feature(260, 220, 25, 20, 20, 0, 20, 40, 60, 90, 95, 0.75, 5));
 	}
 	
 	// front hair strands
