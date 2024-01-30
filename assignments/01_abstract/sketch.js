@@ -47,7 +47,7 @@ function draw() {
 	// go through the array of objects and display each one
 	for (let i = 0; i < face.length; i++) {
 		face[i].display();
-		face[i].randomize();
+		//face[i].randomize();
 	}
 
 	fill(180,0,80 - (mouseY/7.5),0 + (mouseY/20));
