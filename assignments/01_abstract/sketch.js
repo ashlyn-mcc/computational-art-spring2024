@@ -55,10 +55,10 @@ function draw() {
 	for (let i = 0; i < face.length; i++) {
 		face[i].display();
 
-		// randomize face dots when mouse is high on canvas
-		if (mouseY < 500){
-			face[i].randomize();
-		} 
+		// // randomize face dots when mouse is high on canvas
+		// if (mouseY < 400){
+		// 	face[i].randomize();
+		// } 
 	}
 
 	// transparent tint on top of canvas
