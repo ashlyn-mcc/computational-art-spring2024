@@ -1,43 +1,121 @@
 // 02_noise Assignment
 // CSC-496 Computational Art 
 
-let offset = [0,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000];
-let x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6;
+let bloom = [];
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(800, 800);
 	background(0);
 	colorMode(HSB,360,100,100,100);
+	angleMode(DEGREES);
+
+
+	for (let i = 0; i < 2; i++){
+		bloom.push(new Jellyfish(random(100,width-100),random(100,height-100),random(75,100)));
+	}
 }
 
 function draw() {
 	
-	x1 = map(noise(offset[0]),0,1,-200,width+200);
-	y1 = map(noise(offset[1]),0,1,-200,height+200);
-	x2 = map(noise(offset[2]),0,1,-200,width+200);
-	y2 = map(noise(offset[3]),0,1,-200,height+200);
-	x3 = map(noise(offset[4]),0,1,-200,width+200);
-	y3 = map(noise(offset[5]),0,1,-200,height+200);
-	x4 = map(noise(offset[6]),0,1,-200,width+200);
-	y4 = map(noise(offset[7]),0,1,-200,height+200);
-	x5 = map(noise(offset[8]),0,1,-200,width+200);
-	y5 = map(noise(offset[9]),0,1,-200,height+200);
-	
-	strokeWeight(1);
-	stroke(frameCount%360,100,100,10);
-	noFill();
-	
-	beginShape();
-	curveVertex(x1, y1);
-	curveVertex(x2, y2);
-	curveVertex(x3, y3);
-	curveVertex(x4, y4);
-	curveVertex(x5, y5);
+	for (let i = 0; i < bloom.length; i++){
+	bloom[i].dome();
+	bloom[i].flowyPart();
+	}
+}
 
-	endShape(CLOSE);
+class Jellyfish{
+	constructor(x,y,size){
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		this.hue = random(0,360);
+		this.spacing = this.size/6.67;
+		this.minAngle = 0;
+		this.maxAngle = 0;
+		
+		this.offset = [];
+		this.xVertices = [];
+		this.yVertices = [];
 
-	for (let i=0; i < offset.length; i++){
-		offset[i] += 0.002
+		for (let i = 0; i < 40; i++){
+			this.offset.push(random(0,100000));
+		}
+
+		this.amount = random(0,100000);
+		this.rotate = random(15,45);
 	}
 
+	dome(){
+
+		push();
+		translate(this.x,this.y);
+		rotate(this.rotate);
+
+		this.hue = map(noise(this.amount),0,1,0,360)
+		// dome shape
+		strokeWeight(this.size/50);
+		stroke(this.hue,75,40);
+		fill(this.hue,50,100);
+		arc(0,0,this.size,this.size*1.25,180,360);
+
+		// bottom edge dots
+		noStroke();
+		for (let i = 0; i < this.size/this.spacing; i++){
+			ellipse((-this.size/2.2) + this.spacing * i,0,this.spacing,this.spacing);
+		}
+		for (let i = 0; i < this.size/this.spacing; i++){
+			if (i < 3){
+				this.minAngle = 0;
+				this.maxAngle = 230;
+			} else if (i == 3){
+				this.minAngle = 310;
+				this.maxAngle = 230;
+			} else {
+				this.minAngle = 310;
+				this.maxAngle = 180;
+			}
+			fill(0,0,100);
+			noStroke();
+			ellipse((-this.size/2.2) + this.spacing * i,0,this.spacing/2.5,this.spacing/2.5);
+			noFill();
+			stroke(this.hue,75,40);
+			arc((-this.size/2.2) + this.spacing * i,0,this.spacing,this.spacing,this.minAngle,this.maxAngle);
+		}
+
+		this.amount += 0.0005
+		pop();
+	}
+
+	flowyPart(){
+	
+		
+		push()
+		translate(this.x,this.y);
+		rotate(this.rotate);
+		for (let i = 0; i < 20; i++){
+			this.xVertices[i] = map(noise(this.offset[i]),0,1,-this.size/2,this.size/2)
+			this.yVertices[i] = map(noise(this.offset[i+20]),0,1,-this.size,this.size * 3)
+		}
+		
+		strokeWeight(0.25);
+		stroke(map(frameCount%360,0,360,this.hue-50,this.hue+50),100,100,10);
+		noFill();
+		
+		beginShape();
+
+		for (let i = 0; i < 5; i ++){
+			curveVertex(this.xVertices[i],this.yVertices[i])
+		}
+
+		endShape();
+
+
+
+
+		for (let i=0; i < this.offset.length; i++){
+			this.offset[i] += 0.01
+		}
+
+		pop();
+	}
 }
