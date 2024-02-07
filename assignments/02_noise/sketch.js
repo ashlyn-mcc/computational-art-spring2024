@@ -10,17 +10,31 @@ function setup() {
 	angleMode(DEGREES);
 
 
-	for (let i = 0; i < 2; i++){
-		bloom.push(new Jellyfish(random(100,width-100),random(100,height-100),random(75,100)));
+	// for (let i = 0; i < 2; i++){
+	// 	bloom.push(new Jellyfish(random(100,width-100),random(100,height-100),random(75,100)));
+	// }
+
+	for (let i = 1500; i > 0; i--){
+		fill(210,i/15,i/60);
+		noStroke();
+		ellipse(400,200,i)
 	}
 }
 
 function draw() {
-	
+
+	console.log(frameCount);
+
+	fill(0,0,0,1);
+
 	for (let i = 0; i < bloom.length; i++){
 	bloom[i].dome();
 	bloom[i].flowyPart();
 	}
+}
+
+function mouseClicked(){
+	bloom.push(new Jellyfish(mouseX,mouseY,random(45,100)))
 }
 
 class Jellyfish{
@@ -37,6 +51,7 @@ class Jellyfish{
 		this.xVertices = [];
 		this.yVertices = [];
 
+		this.extend = random(2,4)
 		for (let i = 0; i < 40; i++){
 			this.offset.push(random(0,100000));
 		}
@@ -82,7 +97,7 @@ class Jellyfish{
 			arc((-this.size/2.2) + this.spacing * i,0,this.spacing,this.spacing,this.minAngle,this.maxAngle);
 		}
 
-		this.amount += 0.0005
+		this.amount += 0.001
 		pop();
 	}
 
@@ -92,13 +107,14 @@ class Jellyfish{
 		push()
 		translate(this.x,this.y);
 		rotate(this.rotate);
-		for (let i = 0; i < 20; i++){
-			this.xVertices[i] = map(noise(this.offset[i]),0,1,-this.size/2,this.size/2)
-			this.yVertices[i] = map(noise(this.offset[i+20]),0,1,-this.size,this.size * 3)
+		for (let i = 0; i < 5; i++){
+			this.xVertices[i] = map(noise(this.offset[i]),0,1,-this.size/3,this.size/3)
+			this.yVertices[i] = map(noise(this.offset[i+20]),0,1,-this.size,this.size * this.extend)
+
 		}
 		
 		strokeWeight(0.25);
-		stroke(map(frameCount%360,0,360,this.hue-50,this.hue+50),100,100,10);
+		stroke(map(frameCount%360,0,360,this.hue-20,this.hue+20),100,100,10);
 		noFill();
 		
 		beginShape();
@@ -118,4 +134,6 @@ class Jellyfish{
 
 		pop();
 	}
+
+	
 }
