@@ -401,3 +401,12 @@ function stairScene(){
 	fill(50, 100, 100, 40);
 	arc(310, 228, 5, 5, 0, 180);
 }
+
+/*
+ Scrapped drafts I wanted to save:
+	https://openprocessing.org/sketch/2172534
+	https://openprocessing.org/sketch/2171717
+	https://openprocessing.org/sketch/2168677
+	https://openprocessing.org/sketch/2168667
+	https://openprocessing.org/sketch/2170874
+*/
