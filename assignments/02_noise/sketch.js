@@ -266,13 +266,13 @@ function stairScene(){
 	// background greyscale gradient
 	for (let i = 0; i < 225; i++) {
 		strokeWeight(1);
-		stroke(0, 0, map(i, 0, 225, 0, 10))
+		stroke(0, 0, map(i, 0, 225, 0, 20))
 		line(i, 0, i, height);
 		line(600 - i, 0, 600 - i, 700);
 	}
 
 	for (let i = 0; i < 76; i++){
-		stroke(0, 0, map(i, 0, 150, 10, 2))
+		stroke(0, 0, map(i, 0, 150, 20, 2))
 		line(i+225, 0, i+225, height);
 		line(375 - i, 0, 375 - i, 700);
 	}
