@@ -58,6 +58,51 @@ function setup() {
 }
 
 
+function draw() {
+
+	// draws section rectangle for disco balls
+	noStroke();
+	fill(5);
+	rect(600,0,600,700);
+
+	// draws and scales disco balls
+	push()
+	translate(750,250);
+	scale(0.75)
+	discoBall(250);
+	pop()
+
+	// draws and scales disco balls
+	push()
+	translate(650,0);
+	scale(0.5)
+	discoBall(200);
+	pop()
+
+	// draws and scales disco balls
+	push()
+	translate(1000,0);
+	scale(0.25)
+	discoBall(310);
+	pop()
+
+	stroke(50);
+	strokeWeight(2);
+	line(975,0,975,315)
+	noStroke();
+
+
+
+	// draw the light beam emmitting
+	lightBeam();
+
+	// dividing middle line
+	strokeWeight(5);
+	stroke(10);
+	line(600,0,600,700);
+}
+
+
 function lightBeam() {
 
 	// use perlin noise to map 5 new points for the curve vertex light beam
@@ -108,41 +153,6 @@ function lightBeam() {
 	}
 }
 
-
-function draw() {
-
-	// draws section rectangle for disco balls
-	noStroke();
-	fill(5);
-	rect(600,0,600,700);
-
-	// draws and scales disco balls
-	push()
-	translate(750,250);
-	scale(0.75)
-	discoBall(250);
-	pop()
-
-	// draws and scales disco balls
-	push()
-	translate(650,0);
-	scale(0.5)
-	discoBall(200);
-	pop()
-
-	// draws and scales disco balls
-	push()
-	translate(1000,0);
-	scale(0.25)
-	discoBall(310);
-	pop()
-
-	
-
-
-	// draw the light beam emmitting
-	lightBeam();
-}
 
 function discoBall(hueVal){
 
@@ -250,14 +260,21 @@ class tile{
 	
 }
 
+
 function stairScene(){
 
 	// background greyscale gradient
-	for (let i = 0; i < 301; i++) {
+	for (let i = 0; i < 225; i++) {
 		strokeWeight(1);
-		stroke(0, 0, map(i, 0, 301, 0, 10))
+		stroke(0, 0, map(i, 0, 225, 0, 10))
 		line(i, 0, i, height);
 		line(600 - i, 0, 600 - i, 700);
+	}
+
+	for (let i = 0; i < 76; i++){
+		stroke(0, 0, map(i, 0, 150, 10, 2))
+		line(i+225, 0, i+225, height);
+		line(375 - i, 0, 375 - i, 700);
 	}
 
 	// background fill of all the steps from closest to furthest
@@ -277,6 +294,13 @@ function stairScene(){
 	quad(215, 405, 385, 405, 345, 380, 255, 380)
 	fill(220, 0, 20)
 	quad(255, 375, 345, 375, 335, 370, 265, 370)
+
+
+	for (let i = 0; i < 18; i++){
+		strokeWeight(1);
+		stroke(0,0,map(i,0,20,20,0))
+		line(335-i*2,370-i,265+i*2,370-i);
+	}
 
 	fill(220, 0, 4)
 	rect(95, 575, 410, 25)
@@ -354,9 +378,11 @@ function stairScene(){
 	line(345, 380, 345, 375)
 	line(255, 375, 345, 375)
 
-	line(265, 370, 335, 370)
-	line(265, 370, 255, 375)
-	line(335, 370, 345, 375)
+	// line(265, 370, 335, 370)
+	strokeWeight(1);
+	line(255, 375, 300, 352)
+	line(345, 375, 300, 352)
+	strokeWeight(2)
 
 	// lamp post
 	fill(0);
