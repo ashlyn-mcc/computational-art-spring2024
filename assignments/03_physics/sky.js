@@ -51,8 +51,8 @@ class Cloud{
 	
 	ball(xVal,yVal){
 			for (let i = 0; i < 75; i++){
-					strokeWeight(3);
-					stroke(0,0,this.brightnessArray[i],50);
+					strokeWeight(2);
+					stroke(0,0,this.brightnessArray[i],60);
 					this.x1 = xVal + 40 * cos(map(i,0,75,0, 2 * PI));
 					this.y1 = yVal + 40 * sin(map(i,0,75,0, 2 * PI));
 					this.x2 = xVal + 40 * cos(map(i,0,75, 2 * PI,0));
