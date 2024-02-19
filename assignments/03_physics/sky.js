@@ -49,6 +49,8 @@ class Cloud {
 		}
 	}
 
+
+	// uses polar coordinates to draw cloud circles
 	ball(xVal, yVal) {
 		for (let i = 0; i < 75; i++) {
 			strokeWeight(2);
@@ -60,6 +62,8 @@ class Cloud {
 			line(this.x1, this.y1, this.x2, this.y2)
 		}
 	}
+
+	// puts the circles together into cloud shape
 	update() {
 		push();
 		translate(this.centerX, this.centerY)

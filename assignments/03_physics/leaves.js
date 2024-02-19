@@ -1,21 +1,27 @@
+
+// class for the leaves that fall from the tree
 class Leaf {
 	constructor(x, y, index) {
+
+		// have a position, velocity, and acceleration
 		this.pos = createVector(x, y);
 		this.vel = createVector(0, 0);
 		this.acc = createVector(0, 0);
 
+		// slight variation in hue and mass
 		this.index = index;
 		this.hue = random(0, 85);
 		this.mass = random(0.5, 1.5);
 
 		this.radius = this.mass * 10;
-
 		this.brightness = 0;
 
+		// threshold for when the leaf is considered "in water", and drag will be applied
 		this.inWater = random(500, height)
 	}
 
 
+	// adds forces to acceleration
 	addForce(force) {
 		let forceWithMass = p5.Vector.div(force, this.mass);
 		this.acc.add(forceWithMass);
@@ -24,9 +30,8 @@ class Leaf {
 
 	update(index) {
 
+		// if the leaf is "in the water" add drag as a force and make it darker
 		if (this.pos.x > 490 && this.pos.y > this.inWater) {
-			// only use one constant.
-			// fDrag = -C * mag(velocity)^2
 			let dragConstant = -0.05;
 			let forceDrag = this.vel.mag() * this.vel.mag() * dragConstant;
 			let drag = p5.Vector.normalize(this.vel);
@@ -37,21 +42,26 @@ class Leaf {
 		} else {
 			this.brightness = 0;
 		}
-		// FORCES
+	
+
+		// gravity and wind forces
 		this.addForce(downwardGravity);
 		this.addForce(wind[index]);
 		this.index = index
 
-		// MOVEMENT
-		this.vel.add(this.acc); // Apply acceleration (and thus the forces) to vel
-		this.vel.limit(5); // This limits the magnitude of the velocity vector
-		this.pos.add(this.vel); // Apply velocity to position
+		// updates movement of the leaf
+		this.vel.add(this.acc); 
+		this.vel.limit(3); 
+		this.pos.add(this.vel); 
 
 
+		// clear out the acceleration to prevent accumulation of force
 		this.acc.mult(0);
 	}
 
 	show() {
+
+		// draws the falling leaf
 		push();
 		strokeWeight(1);
 		translate(this.pos.x, this.pos.y);
@@ -69,6 +79,9 @@ class Leaf {
 
 }
 
+
+// creates a single leaf, within a defined cluster area
+// uses polar coordinates to draw leaf within circle parameters
 class LeafCluster {
 	constructor(x, y, xSize, ySize) {
 		this.centerX = x;
@@ -98,6 +111,8 @@ class LeafCluster {
 	}
 
 	show() {
+
+		// draw the leaf
 		push()
 		translate(this.x, this.y)
 		rotate(this.rotation);
@@ -112,6 +127,7 @@ class LeafCluster {
 		endShape(CLOSE);
 		pop();
 
+		// shake the leaves after an ellapsed amount of time
 		if (frameCount % 300 <= 25 && frameCount % 300 >= 0) {
 			this.move();
 			leavesFall = true;
