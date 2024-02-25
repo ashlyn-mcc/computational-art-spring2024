@@ -2,6 +2,7 @@
 // Ashlyn McClendon
 
 let particleSystems = [];
+let flowersArray = [];
 
 function setup() {
 	createCanvas(1200, 750);
@@ -16,14 +17,29 @@ function setup() {
 	}
 
     for (let i = 0; i < 10000; i++){
-        greeneryArray.push(new Greenery(0,width,180,height));
+        greeneryArray.push(new Greenery(0,width,180,height-50));
     }
+
+    for (let i = 0; i < 400; i++){
+            flowersArray.push(new tropicalFlowers(random(475,width),random(200,height-75)))
+
+            if (i % 6 == 0){
+            flowersArray.push(new tropicalFlowers(random(0,100),random(200,height-75)))
+            } else if (i % 8 == 0){
+                flowersArray.push(new tropicalFlowers(random(100,225),random(200,300)))
+                flowersArray.push(new tropicalFlowers(random(350,475),random(200,375)))
+
+            }
+
+    }
+    //A = new tropicalFlowers(400,400,1);
 }
 
 function draw(){
 
 	background(0,0,0,5);
     backgroundScene();
+    
 
 	for (let i = 0; i < particleSystems.length; i++){
 		particleSystems[i].update();
@@ -44,9 +60,40 @@ function draw(){
     rect(420,375,65,20,5);
     fill(195,80,55);
     rect(290,183,100,35);
+
+    for (let i = 0; i < flowersArray.length; i++){
+        flowersArray[i].drawFlower();
+    }
+  
+    //A.drawFlower();
 }
 
+class tropicalFlowers{
+    constructor(x,y){
+        this.position = createVector(x,y)
+        this.scale = map(this.position.y,200,height-75,0.5,1.5)
+        this.hue = random(0,360);
+    }
+    
+    drawFlower(){
+        fill(this.hue,100,100,20);
+        stroke(this.hue,100,100,30)
+        push();
+        translate(this.position.x,this.position.y)
+        scale(this.scale);
+        circle(0,0,5)
 
+        for(let i = 0; i < 5; i++){
+            let angle = map(i,0,5,0,2 * PI);
+            let x = sin(angle) * 8
+            let y = cos(angle) * 8
+            circle(x,y,10)
+
+        }
+
+        pop();
+    }
+}
 function backgroundScene(){
 
    
@@ -64,6 +111,13 @@ function backgroundScene(){
         greeneryArray[i].update();
     }
 
+    fill(195,80,60,30);
+    beginShape();
+    curveVertex(0,height);
+    curveVertex(0,height-50);
+    curveVertex(400,height-100);
+    curveVertex(750,height + 20);
+    endShape(CLOSE);
    
 
 }
@@ -75,9 +129,6 @@ class Greenery{
         let x = random(minX,maxX);
         let y = random(minY,maxY);
         this.position = createVector(x,y);
-
-        
-        
 
         this.color = color(random(80,120),random(50,85),random(45,70),map(this.position.y,minY,maxY,5,20))
     }

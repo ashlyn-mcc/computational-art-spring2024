@@ -5,15 +5,20 @@ class Particle{
 
         this.maxVel = random(5,10);
 
-       this.hue = random(190,210)
+        this.hue = random(190,210)
 
-       this.satMax = random(30,60)
+        this.satMax = random(30,60)
+
+        this.bound = false;
+
+        this.end = random(45,100);
     }
 
     update(){
 
         this.velocity.y = map(this.position.y,height,0,this.maxVel,0.5)
         this.position.add(this.velocity);
+
 
         noStroke();
         fill(this.hue,map(this.position.y,200,height,0,this.satMax),100,map(this.position.y,0,height,0,20));
@@ -22,7 +27,7 @@ class Particle{
     }
 
     outsideBoundsCheck(){
-        if (this.position.y > height){
+        if (this.position.y > height-this.end){
             return true;
         }
     }
