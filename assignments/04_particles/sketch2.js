@@ -12,7 +12,7 @@ function preload(){
 
 
 function setup() {
-	createCanvas(1200, 750);
+	createCanvas(900, 750);
 	colorMode(HSB, 360, 100, 100, 100)
     rectMode(CENTER);
     imageMode(CENTER);
@@ -26,18 +26,19 @@ function setup() {
         greeneryArray.push(new Greenery(0,width,180,height-50));
     }
 
-    for (let i = 0; i < 400; i++){
-            flowersArray.push(new tropicalFlowers(random(475,width),random(200,height-75)))
+    for (let i = 0; i < 200; i++){
+            flowersArray.push(new tropicalFlowers(random(475,width),random(200,height-100)))
 
             if (i % 7 == 0){
             flowersArray.push(new tropicalFlowers(random(0,100),random(200,height-75)))
-            flowersArray.push(new tropicalFlowers(random(100,225),random(200,300)))
+            flowersArray.push(new tropicalFlowers(random(0,225),random(200,300)))
             flowersArray.push(new tropicalFlowers(random(350,475),random(200,375)))
             }
 
     }
 
-    A = new palmTree(750,550,500);
+    A = new palmTree(650,550,500);
+    B = new starParticleSystem(width,50);
 }
 
 function draw(){
@@ -50,27 +51,29 @@ function draw(){
 		particleSystems[i].update();
 	}
 
-
-    for (let i = 0; i < 200; i++){
-        let sat = map(i,0,200,40,80);
-        let bright = map(i,0,200,100,70);
-
-        stroke(195,sat,bright,10);
-        line(0,i,width,i);
-    }
-
-    fill(100,70,50);
+    fill(100,70,60);
     noStroke();
     rect(165,300,100,20,5);
     rect(420,375,65,20,5);
-    fill(195,80,55);
-    rect(290,183,100,35);
+    fill(195,80,25);
+    rect(290,180,100,30);
 
     for (let i = 0; i < flowersArray.length; i++){
         flowersArray[i].drawFlower();
     }
+    for (let i = 0; i < 200; i++){
+        let sat = map(i,0,200,40,80);
+        let bright = map(i,0,200,100,10);
+
+        stroke(195,sat,bright,50);
+        line(0,i,width,i);
+    }
+
+ 
+
   
     A.drawTree();
+    B.update();
 }
 
 class palmTree{
@@ -80,7 +83,7 @@ class palmTree{
     }
 
     drawTree(){
-        fill(30,40,35);
+        fill(30,60,35);
         noStroke();
         rect(this.position.x,this.position.y,20,this.height);
         image(palmLeaves,this.position.x,this.position.y-(this.height/2.5),300,300);
@@ -92,12 +95,15 @@ class tropicalFlowers{
     constructor(x,y){
         this.position = createVector(x,y)
         this.scale = map(this.position.y,200,height-75,0.5,1.5)
-        this.hue = random(0,360);
+        this.hue1 = random(0,200);
+        this.hue2 = random(320,360);
+        this.hues = [this.hue1,this.hue2];
+        this.hue = random(this.hues);
     }
     
     drawFlower(){
-        fill(this.hue,100,100,20);
-        stroke(this.hue,100,100,30)
+        fill(this.hue,100,map(this.position.y,200,height-100,100,80),20);
+        stroke(this.hue,100,map(this.position.y,200,height-100,100,80),30)
         push();
         translate(this.position.x,this.position.y)
         scale(this.scale);
@@ -136,7 +142,10 @@ function backgroundScene(){
     curveVertex(0,height);
     curveVertex(0,height-50);
     curveVertex(400,height-100);
-    curveVertex(750,height + 20);
+    curveVertex(800,height-50)
+    curveVertex(width,height-75);
+    curveVertex(width + 10, height + 10);
+    //curveVertex(750,height + 20);
     endShape(CLOSE);
    
 
@@ -150,7 +159,7 @@ class Greenery{
         let y = random(minY,maxY);
         this.position = createVector(x,y);
 
-        this.color = color(random(80,120),random(50,85),random(45,70),map(this.position.y,minY,maxY,5,20))
+        this.color = color(random(80,120),random(50,85),map(this.position.y,200,height-50,70,35),map(this.position.y,minY,maxY,10,20))
     }
 
     update(){

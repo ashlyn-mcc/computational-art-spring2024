@@ -7,7 +7,7 @@ class Particle{
 
         this.hue = random(190,210)
 
-        this.satMax = random(30,60)
+        this.satMax = random(50,80)
 
         this.bound = false;
 
@@ -33,4 +33,48 @@ class Particle{
     }
 
   
+}
+
+class starParticle{
+    constructor(x,y){
+        this.position = createVector(x,y);
+        this.velocity = createVector(0,random(-0.5,0.5));
+        this.maxVel = random(-10,-15);
+
+        this.sat = random(20,30);
+        this.bright = random(85,95);
+    }
+
+    update(){
+
+        this.velocity.x = map(this.position.x,width,0,-5,this.maxVel)
+        this.position.add(this.velocity);
+
+
+        noStroke();
+        fill(55,this.sat,this.bright);
+        this.star(this.position.x,this.position.y,map(this.position.x,width,0,12,5),map(this.position.x,width,0,6,2.5),5)
+        
+    }
+
+    star(x, y, radius1, radius2, npoints) {
+        let angle = TWO_PI / npoints;
+        let halfAngle = angle / 2.0;
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += angle) {
+          let sx = x + cos(a) * radius2;
+          let sy = y + sin(a) * radius2;
+          vertex(sx, sy);
+          sx = x + cos(a + halfAngle) * radius1;
+          sy = y + sin(a + halfAngle) * radius1;
+          vertex(sx, sy);
+        }
+        endShape(CLOSE);
+      }
+
+    outsideBoundsCheck(){
+        if (this.position.x < 0){
+            return true;
+        }
+    }
 }
