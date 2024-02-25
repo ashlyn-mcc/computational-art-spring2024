@@ -4,16 +4,22 @@
 let particleSystems = [];
 let flowersArray = [];
 
+let palmLeaves;
+
+function preload(){
+    palmLeaves = loadImage("palmtree.png");
+}
+
+
 function setup() {
 	createCanvas(1200, 750);
 	colorMode(HSB, 360, 100, 100, 100)
     rectMode(CENTER);
+    imageMode(CENTER);
 	for (let i = 0; i < 80; i++){
 	particleSystems.push(new particleSystem(250 + i,190,map(i,0,40,50,100)));
 	particleSystems.push(new particleSystem(400 + i/2,375,map(i,0,40,50,100)));
-    if (i%2 == 0){
     particleSystems.push(new particleSystem(125 + i,300,map(i,0,40,50,100)));
-    }
 	}
 
     for (let i = 0; i < 10000; i++){
@@ -23,16 +29,15 @@ function setup() {
     for (let i = 0; i < 400; i++){
             flowersArray.push(new tropicalFlowers(random(475,width),random(200,height-75)))
 
-            if (i % 6 == 0){
+            if (i % 7 == 0){
             flowersArray.push(new tropicalFlowers(random(0,100),random(200,height-75)))
-            } else if (i % 8 == 0){
-                flowersArray.push(new tropicalFlowers(random(100,225),random(200,300)))
-                flowersArray.push(new tropicalFlowers(random(350,475),random(200,375)))
-
+            flowersArray.push(new tropicalFlowers(random(100,225),random(200,300)))
+            flowersArray.push(new tropicalFlowers(random(350,475),random(200,375)))
             }
 
     }
-    //A = new tropicalFlowers(400,400,1);
+
+    A = new palmTree(750,550,500);
 }
 
 function draw(){
@@ -65,8 +70,23 @@ function draw(){
         flowersArray[i].drawFlower();
     }
   
-    //A.drawFlower();
+    A.drawTree();
 }
+
+class palmTree{
+    constructor(x,y,size){
+        this.position = createVector(x,y);
+        this.height = size;
+    }
+
+    drawTree(){
+        fill(30,40,35);
+        noStroke();
+        rect(this.position.x,this.position.y,20,this.height);
+        image(palmLeaves,this.position.x,this.position.y-(this.height/2.5),300,300);
+    }
+}
+
 
 class tropicalFlowers{
     constructor(x,y){
