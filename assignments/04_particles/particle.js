@@ -1,5 +1,5 @@
 class Particle{
-    constructor(x,y,hue){
+    constructor(x,y,){
         this.position = createVector(x,y);
         this.velocity = createVector(random(-0.5,0.5),0);
 
@@ -9,9 +9,10 @@ class Particle{
 
         this.satMax = random(50,80)
 
-        this.bound = false;
+        this.evap = false;
+        this.destroy = false;
 
-        this.end = random(45,100);
+        this.end = 50;
     }
 
     update(){
@@ -20,15 +21,28 @@ class Particle{
         this.position.add(this.velocity);
 
 
+        if (this.evap){
+            fill(100,25);
+            ellipse(this.position.x, this.position.y,10);
+            this.destroy = true;
+        } else {
         noStroke();
         fill(this.hue,map(this.position.y,200,height,0,this.satMax),100,map(this.position.y,0,height,0,20));
         ellipse(this.position.x, this.position.y, map(this.position.y,700,0,15,25));
+        }
 
+        this.hitWater();
     }
 
     outsideBoundsCheck(){
-        if (this.position.y > height-this.end){
+        if (this.destroy){
             return true;
+        }
+    }
+
+    hitWater(){
+        if (this.position.y > height-this.end){
+            this.evap = true;
         }
     }
 
@@ -38,7 +52,7 @@ class Particle{
 class starParticle{
     constructor(x,y){
         this.position = createVector(x,y);
-        this.velocity = createVector(0,random(-0.5,0.5));
+        this.velocity = createVector(0,random(-1,1));
         this.maxVel = random(-10,-15);
 
         this.sat = random(20,30);
@@ -53,7 +67,7 @@ class starParticle{
 
         noStroke();
         fill(55,this.sat,this.bright,50);
-        this.star(this.position.x,this.position.y,map(this.position.x,width,0,6,3),map(this.position.x,width,0,3,1.5),5)
+        this.star(this.position.x,this.position.y,map(this.position.x,width,0,12,6),map(this.position.x,width,0,6,3),5)
         
     }
 
@@ -112,10 +126,17 @@ class lizardParticle{
         stroke(this.hue,this.sat,this.bright);
         strokeWeight(5);
 
+        if (frameCount % 2 == 0){
         line(-15,-15,0,-10)
         line(-15,5,0,10)
         line(15,-5,0,-10)
         line(15,15,0,10)
+        } else {
+            line(-15,-10,0,-10)
+            line(-15,10,0,10)
+            line(15,-10,0,-10)
+            line(15,10,0,10)
+        }
     
         noFill();
         

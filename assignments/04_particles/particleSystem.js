@@ -56,7 +56,7 @@ class lizardParticleSystem{
     }
 
     update(){
-        if (frameCount % 175 == 0){
+        if (frameCount % 100 == 0){
             this.particles.push(new lizardParticle(this.position.x,this.position.y));
         }
 
