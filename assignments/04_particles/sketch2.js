@@ -39,6 +39,7 @@ function setup() {
 
     A = new palmTree(650,550,500);
     B = new starParticleSystem(width,50);
+    C = new lizardParticleSystem(650,height);
 }
 
 function draw(){
@@ -74,6 +75,13 @@ function draw(){
   
     A.drawTree();
     B.update();
+    C.update();
+
+
+    fill(42,89,18);
+    ellipse(650,320,30,30);
+    ellipse(640,345,30,30);
+    ellipse(660,345,30,30);
 }
 
 class palmTree{

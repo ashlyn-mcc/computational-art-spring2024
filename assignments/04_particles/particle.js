@@ -52,8 +52,8 @@ class starParticle{
 
 
         noStroke();
-        fill(55,this.sat,this.bright);
-        this.star(this.position.x,this.position.y,map(this.position.x,width,0,12,5),map(this.position.x,width,0,6,2.5),5)
+        fill(55,this.sat,this.bright,50);
+        this.star(this.position.x,this.position.y,map(this.position.x,width,0,6,3),map(this.position.x,width,0,3,1.5),5)
         
     }
 
@@ -74,6 +74,58 @@ class starParticle{
 
     outsideBoundsCheck(){
         if (this.position.x < 0){
+            return true;
+        }
+    }
+}
+
+class lizardParticle{
+    constructor(x,y){
+        this.position = createVector(x,y);
+
+        this.velocity = createVector(0,0);
+
+        this.hue = random(0,360);
+        this.sat = 75;
+        this.bright = 80;
+    }
+
+    update(){
+        this.velocity.y = map(this.position.y,height,200,-4,-2)
+        this.position.add(this.velocity);
+
+        push();
+        translate(this.position.x,this.position.y);
+        scale(0.4);
+        noStroke();
+        fill(this.hue,this.sat,this.bright);
+        noStroke();
+        ellipse(0,0,17,50);
+        ellipse(0,-30,15,20)
+        
+        push();
+        translate(0,-34);
+        rotate(PI/4);
+        rect(0,0,11,11,2)
+        pop();
+        
+        stroke(this.hue,this.sat,this.bright);
+        strokeWeight(5);
+
+        line(-15,-15,0,-10)
+        line(-15,5,0,10)
+        line(15,-5,0,-10)
+        line(15,15,0,10)
+    
+        noFill();
+        
+        arc(-25,37,60,60,(7 * PI)/4,PI/6);
+        pop();
+
+    }
+
+    outsideBoundsCheck(){
+        if (this.position.y < 350){
             return true;
         }
     }

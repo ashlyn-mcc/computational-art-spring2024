@@ -35,8 +35,29 @@ class starParticleSystem{
     }
 
     update(){
-        if (frameCount % 60 == 0){
+        if (frameCount % 20 == 0){
             this.particles.push(new starParticle(this.position.x,this.position.y));
+        }
+
+        for (let i = 0; i < this.particles.length; i++){
+            this.particles[i].update();
+            let destroy = this.particles[i].outsideBoundsCheck(i);
+            if (destroy){
+                this.particles.splice(i,1);
+            }
+        }
+    }
+}
+
+class lizardParticleSystem{
+    constructor(x,y){
+        this.position = createVector(x,y);
+        this.particles = [];
+    }
+
+    update(){
+        if (frameCount % 175 == 0){
+            this.particles.push(new lizardParticle(this.position.x,this.position.y));
         }
 
         for (let i = 0; i < this.particles.length; i++){
