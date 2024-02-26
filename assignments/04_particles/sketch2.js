@@ -26,10 +26,10 @@ function setup() {
         greeneryArray.push(new Greenery(0,width,180,height-50));
     }
 
-    for (let i = 0; i < 200; i++){
-            flowersArray.push(new tropicalFlowers(random(475,width),random(200,height-100)))
+    for (let i = 0; i < 100; i++){
+            flowersArray.push(new tropicalFlowers(random(475,width),random(200,height-90)))
 
-            if (i % 7 == 0){
+            if (i % 4 == 0){
             flowersArray.push(new tropicalFlowers(random(0,100),random(200,height-75)))
             flowersArray.push(new tropicalFlowers(random(0,225),random(200,300)))
             flowersArray.push(new tropicalFlowers(random(350,475),random(200,375)))
@@ -56,7 +56,7 @@ function draw(){
     noStroke();
     rect(165,300,100,20,5);
     rect(420,375,65,20,5);
-    fill(195,80,25);
+    fill(195,80,80);
     rect(290,180,100,30);
 
     for (let i = 0; i < flowersArray.length; i++){
@@ -64,7 +64,7 @@ function draw(){
     }
     for (let i = 0; i < 200; i++){
         let sat = map(i,0,200,40,80);
-        let bright = map(i,0,200,100,10);
+        let bright = map(i,0,200,10,100);
 
         stroke(195,sat,bright,50);
         line(0,i,width,i);
@@ -145,7 +145,7 @@ function backgroundScene(){
         greeneryArray[i].update();
     }
 
-    fill(195,80,60,30);
+    fill(195,80,60,75);
     beginShape();
     curveVertex(0,height);
     curveVertex(0,height-50);
