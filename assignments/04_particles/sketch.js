@@ -1,93 +1,187 @@
-let gravity = .013;
-let generators = [];
-let numGenerators = 10;
+// 04_particles
+// Ashlyn McClendon
 
-function setup(){
-    createCanvas(700,700);
-    colorMode(HSB,360,100,100,100);
+// Arrays to hold water particles, flowers, and greenery
+let particleSystems = [];
+let flowersArray = [];
+let greeneryArray = [];
 
-    for (let i = 0; i < numGenerators; i++){
-        generators.push(new particleSystem(map(i,0,numGenerators,0,width),height - (i * random(5,30))))
+// image variable
+let palmLeaves;
+
+// load in palm tree leaves image
+function preload(){
+    palmLeaves = loadImage("palmtree.png");
+}
+
+
+function setup() {
+
+	createCanvas(900, 750);
+	colorMode(HSB, 360, 100, 100, 100)
+    rectMode(CENTER);
+    imageMode(CENTER);
+
+    // creates waterfall particle systems
+	for (let i = 0; i < 80; i++){
+	particleSystems.push(new particleSystem(250 + i,190,map(i,0,40,50,100)));
+	particleSystems.push(new particleSystem(400 + i/2,375,map(i,0,40,50,100)));
+    particleSystems.push(new particleSystem(125 + i,300,map(i,0,40,50,100)));
+	}
+
+
+    // creates greenery dot objects along cliff
+    for (let i = 0; i < 10000; i++){
+        greeneryArray.push(new Greenery(0,width,180,height-50));
     }
-   // system1 = new particleSystem(width/2,height);
+
+    // creates flower objects along cliff
+    for (let i = 0; i < 100; i++){
+            flowersArray.push(new tropicalFlowers(random(475,width),random(200,height-90)))
+            if (i % 4 == 0){
+            flowersArray.push(new tropicalFlowers(random(0,100),random(200,height-75)))
+            flowersArray.push(new tropicalFlowers(random(0,225),random(200,300)))
+            flowersArray.push(new tropicalFlowers(random(350,475),random(200,375)))
+            }
+
+    }
+
+    // create other particle systems
+    palmTreeImage = new palmTree(650,550,500);
+    starGenerator = new starParticleSystem(width,50);
+    lizardGenerator = new lizardParticleSystem(650,height);
 }
 
 function draw(){
-    background(0,0,0,5)
 
-    for (let i = 0; i < generators.length; i++){
-        generators[i].update();
-    }
-    //system1.update();
-}
-
-class particleSystem{
-    constructor(x,y){
-        this.position = createVector(x,y);
-        this.velocity = createVector(0,-3);
-        this.hue = random(0,360);
-        this.numParticles = 20;
-
-        this.explosionSize = 1000;
-
-        this.particles = [];
-        this.makeParticles = true;
-
-        this.alpha = 100;
-    }
-
-    update(){
-        this.velocity.add(0,gravity);
-        fill(this.hue,100,100,this.alpha);
-        this.position.add(this.velocity);
-        ellipse(this.position.x,this.position.y,10,10);
-
-        if (this.velocity.y > 0 && this.makeParticles){
-            for (let i = 0; i < this.numParticles; i++){
-
-                let angle = map(i,0,this.numParticles,0,2 * PI)
-                let x = this.position.x + this.explosionSize * cos(angle);
-                let y = this.position.y + this.explosionSize * sin(angle);
-
-                this.particles.push(new Particle(this.position.x,this.position.y,x,y))
-
-                this.makeParticles = false;
-                this.alpha = 0;
-            }
-        }
-
-        for (let i = 0; i < this.particles.length; i++){
-            this.particles[i].update();
-        }
-    }
+	background(0,0,0,5);
+    backgroundScene();
+    
 
 }
 
-class Particle{
-    constructor(x,y,targetX,targetY){
+class palmTree{
+    constructor(x,y,size){
         this.position = createVector(x,y);
-        this.targetPosition = createVector(targetX,targetY);
-        console.log(this.targetPosition.x,this.targetPosition.y)
-
-        this.stop = false;
+        this.height = size;
     }
 
-    update(){
-
-    //     if (dist(this.position.x,this.position.y,this.targetPosition.x,this.targetPosition.y) == 0){
-    //         this.stop = true;
-    //    // }
-
-       // console.log(dist(this.position.x,this.position.y,this.targetPosition.x,this.targetPosition.y))
-       // if (this.stop == false){
-        let velocity = p5.Vector.sub(this.targetPosition,this.position);
-        velocity.normalize();
-        velocity.add(0,0.5);
-        //console.log(this.targetPosition.x,this.targetPosition.y)
-        this.position.add(velocity);
-        //}
-        fill(40,40,100);
+    drawTree(){
+        fill(30,60,35);
         noStroke();
-        ellipse(this.position.x,this.position.y,2.5);
+        rect(this.position.x,this.position.y,20,this.height);
+        image(palmLeaves,this.position.x,this.position.y-(this.height/2.5),300,300);
+    }
+}
+
+
+class tropicalFlowers{
+    constructor(x,y){
+        this.position = createVector(x,y)
+        this.scale = map(this.position.y,200,height-75,0.5,1.5)
+        this.hue1 = random(0,200);
+        this.hue2 = random(320,360);
+        this.hues = [this.hue1,this.hue2];
+        this.hue = random(this.hues);
+    }
+    
+    drawFlower(){
+        fill(this.hue,100,map(this.position.y,200,height-100,100,80),20);
+        stroke(this.hue,100,map(this.position.y,200,height-100,100,80),30)
+        push();
+        translate(this.position.x,this.position.y)
+        scale(this.scale);
+        circle(0,0,5)
+
+        for(let i = 0; i < 5; i++){
+            let angle = map(i,0,5,0,2 * PI);
+            let x = sin(angle) * 8
+            let y = cos(angle) * 8
+            circle(x,y,10)
+
+        }
+
+        pop();
+    }
+}
+function backgroundScene(){
+
+   
+
+    for (let i = 0; i < 550; i++){
+        let sat = map(i,0,550,10,20);
+        let bright = map(i,0,550,20,35);
+
+        stroke(45,sat,bright,10);
+        line(0,i + 200,width,i + 200);
+    }
+
+   
+    for (let i = 0; i < greeneryArray.length; i++){
+        greeneryArray[i].update();
+    }
+
+    fill(195,80,60,75);
+    beginShape();
+    curveVertex(0,height);
+    curveVertex(0,height-50);
+    curveVertex(400,height-100);
+    curveVertex(800,height-50)
+    curveVertex(width,height-75);
+    curveVertex(width + 10, height + 10);
+    //curveVertex(750,height + 20);
+    endShape(CLOSE);
+   
+
+	for (let i = 0; i < particleSystems.length; i++){
+		particleSystems[i].update();
+	}
+
+    fill(100,70,60);
+    noStroke();
+    rect(165,300,100,20,5);
+    rect(420,375,65,20,5);
+    fill(195,80,80);
+    rect(290,180,100,30);
+
+    for (let i = 0; i < flowersArray.length; i++){
+        flowersArray[i].drawFlower();
+    }
+    for (let i = 0; i < 200; i++){
+        let sat = map(i,0,200,40,80);
+        let bright = map(i,0,200,10,100);
+
+        stroke(195,sat,bright,50);
+        line(0,i,width,i);
+    }
+
+ 
+
+  
+    palmTreeImage.drawTree();
+    starGenerator.update();
+    lizardGenerator.update();
+
+
+    fill(42,89,18);
+    ellipse(650,320,30,30);
+    ellipse(640,345,30,30);
+    ellipse(660,345,30,30);
+}
+
+
+class Greenery{
+    constructor(minX,maxX,minY,maxY){
+        let x = random(minX,maxX);
+        let y = random(minY,maxY);
+        this.position = createVector(x,y);
+
+        this.color = color(random(80,120),random(50,85),map(this.position.y,200,height-50,70,35),map(this.position.y,minY,maxY,10,20))
+    }
+
+    update(){
+        fill(this.color);
+        noStroke();
+        ellipse(this.position.x,this.position.y,map(this.position.y,200,height-50,30,10));
     }
 }
