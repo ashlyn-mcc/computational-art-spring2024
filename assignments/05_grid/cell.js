@@ -14,8 +14,8 @@ class Cell {
         this.xIndex = indexX;
         this.yIndex = indexY;
 
-        this.minHue = hue-20;
-        this.maxHue = hue+20;
+        this.minHue = hue-60;
+        this.maxHue = hue+60;
 
         this.bright = 70;
         this.sat = random(0,100);
@@ -25,15 +25,15 @@ class Cell {
 
     update() {
         noStroke();
-        fill(this.hue, this.sat, this.bright);
 
         this.sine();
-        this.hexagon();
+
     }
 
     hexagon(){
 
         push();
+        fill(this.hue, this.sat, this.bright,100);
         translate(this.x,this.y);
         beginShape();
         vertex(0,-this.height/2);
@@ -48,14 +48,27 @@ class Cell {
         pop();
     }
 
+    circular(){
+        push();
+        translate(this.x,this.y);
+        fill(this.hue, this.sat, this.bright,100);
+        ellipse(0,0,this.width,this.height);
+        pop();
+    }
+
     sine(){
         let sinVal = sin((frameCount * 0.04) + (this.x * 0.04));
         let cosVal = cos((frameCount * 0.04) + (this.y * -0.04));
-        let wSize = map(sinVal, -1, 1, this.maxWidth/3,this.maxWidth);
-        let hSize = map(cosVal, -1, 1, this.maxHeight/3,this.maxHeight);
+        this.width = map(sinVal, -1, 1, this.maxWidth/3,this.maxWidth);
+        this.height = map(cosVal, -1, 1, this.maxHeight/3,this.maxHeight);
         this.hue = map(sinVal * cosVal,-1,1,this.minHue,this.maxHue);
         this.sat = map(-sinVal * cosVal,-1,1,100,50);
-        this.width = wSize;
-        this.height = hSize;
+
+        this.hexagon();
+
+        this.width = map(-sinVal, -1, 1, this.maxWidth/3,this.maxWidth);
+        this.height = map(-cosVal, -1, 1, this.maxHeight/3,this.maxHeight);
+        this.hue = (this.hue + 180) % 360;
+        this.circular();
     }
 }
