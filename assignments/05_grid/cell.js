@@ -18,7 +18,7 @@ class Cell {
         this.maxHue = hue+60;
 
         this.bright = 70;
-        this.sat = random(0,100);
+        this.sat = 70;
 
         this.increase = 0;
     }
@@ -30,10 +30,18 @@ class Cell {
 
     }
 
-    hexagon(){
+    hexagon(fillOrStroke){
 
         push();
-        fill(this.hue, this.sat, this.bright,100);
+
+        if (fillOrStroke == 'fill'){
+        fill(this.hue, this.sat-50, this.bright,100);
+        noStroke();
+        } else {
+        noFill();
+        strokeWeight(3);
+        stroke(this.hue, this.sat, this.bright,100);
+        }
         translate(this.x,this.y);
         beginShape();
         vertex(0,-this.height/2);
@@ -44,14 +52,16 @@ class Cell {
         vertex(-this.width/3.5,this.height/2);
         vertex(-this.width/2,0)
         vertex(-this.width/3.5,-this.height/2);
-        endShape();
+        endShape(CLOSE);
         pop();
     }
 
     circular(){
         push();
         translate(this.x,this.y);
-        fill(this.hue, this.sat, this.bright,100);
+        stroke(this.hue, this.sat, this.bright,75);
+        strokeWeight(2);
+        noFill();
         ellipse(0,0,this.width,this.height);
         pop();
     }
@@ -64,11 +74,12 @@ class Cell {
         this.hue = map(sinVal * cosVal,-1,1,this.minHue,this.maxHue);
         this.sat = map(-sinVal * cosVal,-1,1,100,50);
 
-        this.hexagon();
+        this.hexagon('fill');
 
         this.width = map(-sinVal, -1, 1, this.maxWidth/3,this.maxWidth);
         this.height = map(-cosVal, -1, 1, this.maxHeight/3,this.maxHeight);
         this.hue = (this.hue + 180) % 360;
+
         this.circular();
     }
 }
