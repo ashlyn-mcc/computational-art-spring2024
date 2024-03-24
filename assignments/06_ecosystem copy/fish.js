@@ -15,14 +15,12 @@ class Fish {
 
     this.type = type
 
-    this.size = random(10,20);
-
     if (this.type == 1) {
       this.hue = 0;
     } else if (this.type == 2) {
       this.hue = 100;
     } else {
-      this.hue = 300;
+      this.hue = 200;
     }
 
   }
@@ -30,13 +28,11 @@ class Fish {
   show() {
     this.wrap();
 
-    fill(this.hue,100,100);
-    noStroke();
+    fill(this.hue, 100, 100);
 
     push();
     translate(this.position.x, this.position.y);
-    triangle(0,0,-this.size * (2/3),-this.size * (1/3),-this.size * (2/3),this.size * (1/3))
-    ellipse(0,0,this.size,this.size/3)
+    circle(0, 0, 15);
     pop();
 
   }
@@ -47,6 +43,7 @@ class Fish {
     this.acceleration.limit(this.forceCap);
     this.velocity.add(this.acceleration);
     this.velocity.limit(this.speedCap,1)
+   // this.velocity.limit(this.speedCap);
     this.position.add(this.velocity);
     this.acceleration.set(0, 0)
   }
