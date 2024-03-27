@@ -15,14 +15,19 @@ class Fish {
 
     this.type = type
 
-    this.size = random(10,20);
+    this.size = random(10, 20);
+
+    this.caught = false;
 
     if (this.type == 1) {
-      this.hue = 0;
+      this.right = tetraRight;
+      this.left = tetraLeft;
     } else if (this.type == 2) {
-      this.hue = 100;
+      this.right = zebraRight;
+      this.left = zebraLeft;
     } else {
-      this.hue = 300;
+      this.right = rosboraRight;
+      this.left = rosboraLeft;
     }
 
   }
@@ -30,25 +35,44 @@ class Fish {
   show() {
     this.wrap();
 
-    fill(this.hue,100,100);
+    fill(this.hue, 100, 100, 50);
     noStroke();
 
     push();
     translate(this.position.x, this.position.y);
-    triangle(0,0,-this.size * (2/3),-this.size * (1/3),-this.size * (2/3),this.size * (1/3))
-    ellipse(0,0,this.size,this.size/3)
+    let angle = this.velocity.heading();
+    // ellipse(0, 0, this.size, this.size / 3)
+
+    let currentImage;
+
+    if (this.velocity.x < 0){
+      rotate(angle)
+      currentImage = this.right
+    } else {
+      rotate(angle);
+      currentImage = this.right
+    }
+    image(currentImage, 0, 0, 20, 20);
     pop();
 
   }
 
   swim() {
-    this.school();
 
-    this.acceleration.limit(this.forceCap);
-    this.velocity.add(this.acceleration);
-    this.velocity.limit(this.speedCap,1)
-    this.position.add(this.velocity);
-    this.acceleration.set(0, 0)
+    this.hookCheck();
+
+    if (this.caught) {
+      this.position = hook.position
+    } else {
+
+      this.school();
+      this.acceleration.limit(this.forceCap);
+      this.velocity.add(this.acceleration);
+      this.velocity.limit(this.speedCap, 1)
+      this.position.add(this.velocity);
+      this.acceleration.set(0, 0)
+
+    }
   }
 
   school() {
@@ -121,19 +145,28 @@ class Fish {
   separation(neighboringFish) {
     let separationForce = createVector();
     for (let fishy of neighboringFish) {
-      let diff = p5.Vector.sub(this.position, fishy.position);
-      let d = diff.mag();
+      let difference = p5.Vector.sub(this.position, fishy.position);
+      let d = difference.mag();
       if (d > 0 && d < this.range) {
-        diff.div(d * d); // Weighted by distance squared
-        separationForce.add(diff);
+        difference.div(d * d);
+        separationForce.add(difference);
       }
     }
     separationForce.limit(this.forceCap);
     return separationForce;
   }
 
+  hookCheck() {
+    if (hook.reelIn == false) {
+      if (dist(this.position.x, this.position.y, hook.position.x, hook.position.y) < 1) {
+        hook.reelIn = true;
+        this.caught = true;
+      }
+    }
+  }
+
   wrap() {
     this.position.x = (this.position.x + width) % width;
-    this.position.y = (this.position.y + height) % height;
+    this.position.y = (this.position.y + 750) % 750;
   }
 }

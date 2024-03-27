@@ -1,0 +1,8 @@
+class flowCell{
+
+    constructor(){
+
+    }
+
+    
+}
