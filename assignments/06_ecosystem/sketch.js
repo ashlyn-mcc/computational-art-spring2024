@@ -31,7 +31,7 @@ function setup() {
 
     generateFish();
 
-    viewingWindow = createSlider(-1000, 0, 0, -100);
+    viewingWindow = createSlider(-850, 0, 0, -100);
     viewingWindow.position(40, 0);
 
     hook = new FishHook();
