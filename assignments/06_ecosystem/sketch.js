@@ -1,7 +1,7 @@
 let fish = [];
-let numFish1 = 200;
-let numFish2 = 200;
-let numFish3 = 200;
+let numFish1 = 125;
+let numFish2 = 125;
+let numFish3 = 125;
 
 let viewingWindow;
 
@@ -9,19 +9,17 @@ let offsetVal = 0;
 
 let hook;
 
-let tetraLeft, tetraRight;
+let squid1,squid2,squid3
 
-let zebraLeft, zebraRight;
+let stingray;
 
-let rosboraLeft, rosboraRight; 
+let rayField;
 
 function preload(){
-    tetraLeft = loadImage("./tetraL.png");
-    tetraRight = loadImage("./tetraR.png");
-    zebraLeft = loadImage("./zebraL.png");
-    zebraRight = loadImage("./zebraR.png");
-    rosboraLeft = loadImage("./RosboraL.png");
-    rosboraRight = loadImage("./RosboraR.png");
+    squid1 = loadImage("./1squid.png");
+    squid2 = loadImage("./2squid.png");
+    squid3 = loadImage("./3squid.png");
+    stingray = loadImage("./stingray.png");
 
 }
 
@@ -33,10 +31,12 @@ function setup() {
 
     generateFish();
 
-    viewingWindow = createSlider(-3200, 0, -800, -100);
+    viewingWindow = createSlider(-2000, 0, -800, -100);
     viewingWindow.position(40, 0);
 
     hook = new FishHook();
+
+    rayField = new FlowField();
 
 }
 
@@ -47,6 +47,9 @@ function draw() {
     oceanBackground();
     updateFish();
     goFish();
+    rayField.displayGrid();
+    rayField.displayRays();
+    lightBeams();
     pop();
     submarineWindow();
 
@@ -61,6 +64,9 @@ function oceanBackground() {
         line(0, i, width, i);
     }
 
+}
+
+function lightBeams(){
 
     // light rays moving in the water with perlin noise
     push();
@@ -70,7 +76,7 @@ function oceanBackground() {
         let polarX = cos(i + offset) * 2500;
         let polarY = sin(i + offset) * 3000;
         strokeWeight(map(noise(i * offsetVal), 0, 1, 2, 20) * map(viewingWindow.value(), 0, -4000, 1, 5));
-        stroke(100, map(noise(i * offsetVal), 0, 1, 0, 100));
+        stroke(100, map(noise(i * offsetVal), 0, 1, 0, 30));
         line(0, 0, polarX, polarY);
     }
     offsetVal += 0.007
@@ -78,7 +84,7 @@ function oceanBackground() {
 
     // gradient on top of lines to make them fade the deeper they are
     for (let i = 0; i < 4000; i++) {
-        stroke(200, map(i, 0, 4000, 70, 100), map(i, 0, 4000, 100, 0), map(i, 0, 2750, 50, 100));
+        stroke(200, map(i, 0, 4000, 70, 100), map(i, 0, 4000, 100, 0), map(i, 0, 2750, 0, 30));
         line(0, i, width, i);
     }
 

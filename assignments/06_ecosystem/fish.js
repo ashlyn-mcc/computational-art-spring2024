@@ -2,7 +2,7 @@ class Fish {
 
   constructor(type) {
 
-    this.position = createVector(random(width), random(height));
+    this.position = createVector(random(400,width-400), random(height));
     this.velocity = createVector(random(-5, 5), 0);
     this.acceleration = createVector(0, 0);
 
@@ -20,14 +20,11 @@ class Fish {
     this.caught = false;
 
     if (this.type == 1) {
-      this.right = tetraRight;
-      this.left = tetraLeft;
+      this.type = squid1
     } else if (this.type == 2) {
-      this.right = zebraRight;
-      this.left = zebraLeft;
+      this.type = squid2
     } else {
-      this.right = rosboraRight;
-      this.left = rosboraLeft;
+      this.type = squid3
     }
 
   }
@@ -41,18 +38,10 @@ class Fish {
     push();
     translate(this.position.x, this.position.y);
     let angle = this.velocity.heading();
-    // ellipse(0, 0, this.size, this.size / 3)
-
-    let currentImage;
-
-    if (this.velocity.x < 0){
-      rotate(angle)
-      currentImage = this.right
-    } else {
-      rotate(angle);
-      currentImage = this.right
-    }
-    image(currentImage, 0, 0, 20, 20);
+    rotate(angle)
+    tint(100,map(this.position.y,0,800,100,50))
+    let size = map(this.position.y,0,800,60,20)
+    image(this.type, 0, 0, size, size);
     pop();
 
   }

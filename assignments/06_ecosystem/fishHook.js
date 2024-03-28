@@ -27,7 +27,6 @@ class FishHook {
     }
 
     update() {
-        console.log(this.position.y);
 
 
         if (this.stop == false) {
