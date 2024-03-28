@@ -19,6 +19,9 @@ class Fish {
 
     this.caught = false;
 
+    this.dontShow = false;
+
+
     if (this.type == 1) {
       this.type = squid1
     } else if (this.type == 2) {
@@ -32,9 +35,12 @@ class Fish {
   show() {
     this.wrap();
 
-    fill(this.hue, 100, 100, 50);
-    noStroke();
 
+    if (fish.stop == true && this.caught == true){
+      this.dontShow = true;
+    }
+
+    if (this.dontShow == false){
     push();
     translate(this.position.x, this.position.y);
     let angle = this.velocity.heading();
@@ -43,6 +49,7 @@ class Fish {
     let size = map(this.position.y,0,800,60,20)
     image(this.type, 0, 0, size, size);
     pop();
+    }
 
   }
 
@@ -52,6 +59,7 @@ class Fish {
 
     if (this.caught) {
       this.position = hook.position
+      this.removeObject;
     } else {
 
       this.school();
@@ -147,7 +155,7 @@ class Fish {
 
   hookCheck() {
     if (hook.reelIn == false) {
-      if (dist(this.position.x, this.position.y, hook.position.x, hook.position.y) < 1) {
+      if (dist(this.position.x, this.position.y, hook.position.x, hook.position.y) < 4) {
         hook.reelIn = true;
         this.caught = true;
       }
@@ -158,4 +166,6 @@ class Fish {
     this.position.x = (this.position.x + width) % width;
     this.position.y = (this.position.y + 750) % 750;
   }
+
+
 }

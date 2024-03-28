@@ -4,9 +4,10 @@ class FishHook {
         this.initialX = random(400, width - 400);
         this.position = createVector(this.initialX, 0);
         this.velocity = createVector(0, 1);
-        this.maxLength = random(200, 550);
+        this.maxLength = random(500, 700);
         this.reelIn = false;
         this.stop = false;
+
     }
 
     castLine() {
@@ -18,11 +19,12 @@ class FishHook {
     }
 
     show() {
-        fill(0);
         noStroke();
-        ellipse(this.position.x, this.position.y, 10, 10);
-        stroke(0)
+        noFill();
+        stroke(50)
         strokeWeight(3);
+        arc(this.position.x-5, this.position.y, 10, 10,0,PI);
+        stroke(0)
         line(this.initialX, 0, this.position.x, this.position.y);
     }
 
