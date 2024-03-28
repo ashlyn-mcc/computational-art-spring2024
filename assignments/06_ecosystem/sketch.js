@@ -20,7 +20,7 @@ function preload(){
     squid2 = loadImage("./2squid.png");
     squid3 = loadImage("./3squid.png");
     stingray = loadImage("./stingray.png");
-
+   
 }
 
 function setup() {
