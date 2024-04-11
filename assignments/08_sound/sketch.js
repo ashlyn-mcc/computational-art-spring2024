@@ -1,4 +1,4 @@
-let boingSample, aluminiumSample;
+let boingSample, aluminiumSample, gongSample;
 
 let synth, loop;
 
@@ -9,6 +9,7 @@ let sixteenth = 0;
 function preload() {
 	boingSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/boing.wav");
 	aluminiumSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/metal.wav");
+	gongSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/gong.wav");
   }
 
 function setup(){
@@ -18,12 +19,17 @@ function setup(){
 
 function draw(){
 
+	background(0,0,100)
 	
 }
 
 function loopSound(timeFromNow){
 	if (sixteenth % 4 === 0) {
-		aluminiumSample.play(timeFromNow);
+		boingSample.play(timeFromNow);
+	}
+	
+	if (sixteenth % 2 == 0){
+		aluminiumSample.play(timeFromNow)
 	}
 
 	sixteenth++;
