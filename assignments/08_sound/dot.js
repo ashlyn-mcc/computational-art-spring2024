@@ -43,6 +43,6 @@ class Dot{
     }
 
     hitEdge(){
-       bounceSample.play();
+       drumSample.play();
     }
 }
