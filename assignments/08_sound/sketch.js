@@ -1,4 +1,4 @@
-let boingSample, aluminiumSample, gongSample, bwamSample;
+let boingSample, aluminiumSample, gongSample, bwamSample, bounceSample;
 
 let synth, loop;
 
@@ -17,7 +17,7 @@ function preload() {
 	aluminiumSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/metal.wav");
 	gongSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/gong.wav");
 	bwamSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/bwam.wav");
-	bounceSample = loadSound()
+	bounceSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/bounce.wav");
   }
 
 function setup(){

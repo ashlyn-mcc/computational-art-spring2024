@@ -43,6 +43,6 @@ class Dot{
     }
 
     hitEdge(){
-       // bwamSample.play();
+       bounceSample.play();
     }
 }
