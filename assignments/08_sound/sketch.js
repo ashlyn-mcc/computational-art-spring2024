@@ -18,7 +18,7 @@ function preload() {
 	gongSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/gong.wav");
 	bwamSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/bwam.wav");
 	bounceSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/bounce.wav");	
-	drumSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/kick.wav");	
+	//drumSample = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/kick.wav");	
 
   }
 
