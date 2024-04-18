@@ -45,7 +45,7 @@ function setup(){
 	colorMode(HSB,360,100,100,100);	
 	angleMode(DEGREES);
 	background(0,50);
-
+	console.log("updated")
 	starSynth = new p5.PolySynth();
 	starReverb = new p5.Reverb();
 	starReverb.process(starSynth, 3, 2);
