@@ -92,7 +92,7 @@ function setup(){
 
 function draw(){
 	background(0);
-	fill(100,50,50);
+	fill(100,50,50,5);
 	rect(0,350,width,350);
 
 	for (let i = 0; i < 350; i++){
@@ -101,7 +101,7 @@ function draw(){
 			maxBright =  30;
 		}
 		noStroke();
-		fill(200,60,map(i,0,350,0,maxBright));
+		fill(200,60,map(i,0,350,0,maxBright),5);
 		rect(0,i,width,1);
 	}
 	for (let i = 0; i < grasses.length; i++){
