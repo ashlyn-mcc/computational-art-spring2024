@@ -1,7 +1,7 @@
 let mushrooms = [];
 let water = [];
 let pondOffsets = [];
-let numShrooms = 8;
+let numShrooms = 6;
 let grasses = [];
 
 let starSynth;
@@ -12,18 +12,29 @@ let starReverb;
 let starDelay;
 
 let lightSynth;
-let lightScale = 'pentatonic major'
+let lightScale = 'ionian'
 let sixteenth2 = 0;
-let interval2 = 4;
+let interval2 = 8;
 let lightReverb;
 let lightDelay;
 
+let interval3 = 2;
+let softDrum;
+let triangleSound;
 
+let currentNote;
+
+let moonFrog, jarFrog, padFrog;
 
 function preload() {
-	
-
+	softDrum = loadSound("./samples/softDrumz.wav")
+	triangleSound = loadSound("./samples/ding.wav")
+	moonFrog = loadImage("./images/moon.PNG");
+	jarFrog = loadImage("./images/jar.PNG");
+	padFrog = loadImage("./images/lilipad.PNG");
   }
+
+
 function setup(){
 	createCanvas(1200,700);
 	colorMode(HSB,360,100,100,100);	
@@ -40,7 +51,10 @@ function setup(){
 	lightReverb = new p5.Reverb();
 	lightReverb.process(lightSynth, 3, 2);
 	lightDelay = new p5.Delay();
-	lightDelay.process(lightSynth, 0.12, .4, 2300);
+	lightDelay.process(lightSynth, 0.4, .4, 2300);
+
+	softDrum.setVolume(1);
+	triangleSound.setVolume(0.4)
 
 	let counter = 0;
 	for (let i = 0; i < 180; i++) {
@@ -50,33 +64,39 @@ function setup(){
 	}
 
 	for (let i = 1; i <= numShrooms; i++){
-		let x = (i * map(i,0,numShrooms,65,85))+475
-		let y = (log(i)*-125)+630
-		mushrooms.push(new Mushroom(x,y,map(i,0,numShrooms,0.4,0.55),random(0,20)));
+		let x = (i * map(i,0,numShrooms,65,150))+100
+		let y = (log(i)*-135)+575
+		mushrooms.push(new Mushroom(x,y,map(i,0,numShrooms,0.75,0.4),random(0,20),i-1));
 
 	}
 
 
-	for (let i = 0; i < 5000; i++){
-		grasses.push(new Grass(random(width),random(400,height),random(10,40)))
+	for (let i = 0; i < 7500; i++){
+		grasses.push(new Grass(random(width),random(350,height),random(10,40)))
 	}
 }
 
 function draw(){
+	background(0);
 	fill(100,50,50);
-	rect(0,400,width,300);
+	rect(0,350,width,350);
 	for (let i = 0; i < grasses.length; i++){
 		grasses[i].show();
 	}
 
 	// draws grass
 	for (let i = 0; i < water.length; i++) {
-		water[i].update();
+		//water[i].update();
 	}
 
 	for (let i = 0; i < mushrooms.length; i++){
+		mushrooms[i].update();
 		mushrooms[i].display();
 	}
+
+	// image(moonFrog,100,50,150,150);
+	// image(padFrog,900,500,200,200);
+	// image(jarFrog,150,400,200,200)
 
 	// increase offsets used for noise to alter the grass length
 	// makes it look like waves are washing up.
@@ -87,33 +107,36 @@ function draw(){
 
 function loopSound(timeFromNow){
 
-  	note = floor(random(0, scales[musicScale].length));
-	console.log("star");
-	starSynth.play(midiToFreq(60 + scales[musicScale][note]), 0.5, timeFromNow, 0.3);
-  	note++;
-  	note = note % 8;
+	note = floor(random(0, scales[musicScale].length));
+	console.log(note);
+	currentNote = note;
+	console.log(note);
+	starSynth.play(midiToFreq(72 + scales[musicScale][note]), 0.5, timeFromNow, 0.3);
+	note++;
+	note = note % 8;
 	sixteenth++;
-	
 }
 
 function loopSound2(timeFromNow){
 
 	note = floor(random(0, scales[lightScale].length));
-
-  	starSynth.play(midiToFreq(48 + scales[lightScale][note]), 0.5, timeFromNow, 0.3);
-	console.log("light");
+  	lightSynth.play(midiToFreq(48 + scales[lightScale][note]), 0.5, timeFromNow, 0.3);
 	note++;
 	note = note % 8;
   	sixteenth++;
-  
+	
 }
 
+function loopSound3(timeFromNow){
+	softDrum.play(timeFromNow);
+}
 
 function mousePressed() {
 	loop = new p5.SoundLoop(loopSound, interval/4);
 	loop2 = new p5.SoundLoop(loopSound2, interval2/4);
-
+	loop3 = new p5.SoundLoop(loopSound3,interval3/4);
 	loop.start(); 
 	loop2.start(); 
+	loop3.start();
 
   }
