@@ -4,6 +4,8 @@ let pondOffsets = [];
 let numShrooms = 6;
 let grasses = [];
 
+let chimeSound;
+
 let starSynth;
 let musicScale = 'pentatonic major'
 let sixteenth = 0;
@@ -20,7 +22,7 @@ let lightDelay;
 
 let interval3 = 2;
 let softDrum;
-let triangleSound;
+let dingSound;
 
 let currentNote;
 
@@ -34,9 +36,10 @@ let changeColor = false;
 
 function preload() {
 	softDrum = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/softDrumz.wav");
-	triangleSound = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/ding.wav");
 	meditateFrog = loadImage("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/images/meditate.png");
-	
+	dingSound = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/ding.wav")
+	chimeSound = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/chime.wav")
+
   }
 
 
@@ -59,7 +62,7 @@ function setup(){
 	lightDelay.process(lightSynth, 0.4, .4, 2300);
 
 	softDrum.setVolume(1);
-	triangleSound.setVolume(0.4)
+	chimeSound.setVolume(1)
 
 	orb = new Dot(470,590);
 
@@ -73,7 +76,7 @@ function setup(){
 	for (let i = 1; i <= numShrooms; i++){
 		let x = (i * map(i,0,numShrooms,65,100))+25
 		let y = (log(i)*-135)+575
-		mushrooms.push(new Mushroom(x,y,map(i,0,numShrooms,0.6,0.4),random(0,30),i-1));
+		mushrooms.push(new Mushroom(x,y,map(i,0,numShrooms,0.6,0.4),random(0,45),i-1));
 
 	}
 
@@ -93,10 +96,11 @@ function draw(){
 	for (let i = 0; i < 350; i++){
 		let maxBright = 10;
 		if (boom){
-			maxBright =  30;
+			console.log("Entering");
+			maxBright =  20;
 		}
 		noStroke();
-		fill(200,60,map(i,0,350,0,maxBright),5);
+		fill(200,60,map(i,0,350,0,maxBright));
 		rect(0,i,width,1);
 	}
 	for (let i = 0; i < grasses.length; i++){
@@ -174,3 +178,9 @@ function mousePressed() {
 	loop2.start(); 
 	loop3.start();
   }
+
+  function keyPressed() {
+	if (keyCode === 32) { // 32 is the keyCode for the space bar
+		chimeSound.play(); // Play the sound if not already playing
+	}
+}
