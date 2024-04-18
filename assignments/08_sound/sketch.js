@@ -38,7 +38,7 @@ function preload() {
 	softDrum = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/softDrumz.wav");
 	meditateFrog = loadImage("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/images/meditate.png");
 	dingSound = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/ding.wav")
-	chimeSound = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/chime.wav")
+	chimeSound = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/ding2.mp3")
 
   }
 
