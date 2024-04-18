@@ -24,16 +24,19 @@ let triangleSound;
 
 let currentNote;
 
-let moonFrog, jarFrog, padFrog;
+let meditateFrog;
 
 let boom;
 
+let orb;
+
+let changeColor = false;
+
 function preload() {
-	softDrum = loadSound("./samples/softDrumz.wav")
-	triangleSound = loadSound("./samples/ding.wav")
-	moonFrog = loadImage("./images/moon.PNG");
-	jarFrog = loadImage("./images/jar.PNG");
-	padFrog = loadImage("./images/lilipad.PNG");
+	softDrum = loadSound("./samples/softDrumz.wav");
+	triangleSound = loadSound("./samples/ding.wav");
+	meditateFrog = loadImage("./images/meditate.png");
+	
   }
 
 
@@ -57,6 +60,8 @@ function setup(){
 
 	softDrum.setVolume(1);
 	triangleSound.setVolume(0.4)
+
+	orb = new Dot(470,590);
 
 	let counter = 0;
 	for (let i = 0; i < 180; i++) {
@@ -106,9 +111,19 @@ function draw(){
 		mushrooms[i].display();
 	}
 
+	for (let i = 0; i < 175; i++){
+		strokeWeight(1);
+		stroke(75,100,100,map(i,0,175,175,0));
+		noFill();
+		ellipse(470,570,i)
+	}
 	// image(moonFrog,100,50,150,150);
 	// image(padFrog,900,500,200,200);
-	// image(jarFrog,150,400,200,200)
+	image(meditateFrog,400,500,150,150)
+	// fill(100);
+	// ellipse(470,590,50,50);
+
+	orb.show();
 
 	// increase offsets used for noise to alter the grass length
 	// makes it look like waves are washing up.
@@ -135,6 +150,7 @@ function loopSound2(timeFromNow){
 
 	note = floor(random(0, scales[lightScale].length));
   	lightSynth.play(midiToFreq(48 + scales[lightScale][note]), 0.5, timeFromNow, 0.3);
+	changeColor = true;
 	note++;
 	note = note % 8;
   	sixteenth++;
