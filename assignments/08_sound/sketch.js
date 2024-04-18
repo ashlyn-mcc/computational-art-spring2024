@@ -81,6 +81,13 @@ function setup(){
 	for (let i = 0; i < 7500; i++){
 		grasses.push(new Grass(random(width),random(350,height),random(10,40)))
 	}
+
+	loop = new p5.SoundLoop(loopSound, interval/4);
+	loop2 = new p5.SoundLoop(loopSound2, interval2/4);
+	loop3 = new p5.SoundLoop(loopSound3,interval3/4);
+	loop.start(); 
+	loop2.start(); 
+	loop3.start();
 }
 
 function draw(){
@@ -163,11 +170,6 @@ function loopSound3(timeFromNow){
 }
 
 function mousePressed() {
-	loop = new p5.SoundLoop(loopSound, interval/4);
-	loop2 = new p5.SoundLoop(loopSound2, interval2/4);
-	loop3 = new p5.SoundLoop(loopSound3,interval3/4);
-	loop.start(); 
-	loop2.start(); 
-	loop3.start();
+	
 
   }

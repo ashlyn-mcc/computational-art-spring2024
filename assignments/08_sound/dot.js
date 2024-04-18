@@ -20,7 +20,6 @@ class Dot{
         this.brightOffset += 0.01;
         this.satOffset += 0.01;
 
-        console.log(this.brightness)
 
         fill(this.hue,this.saturation,this.brightness)
         ellipse(this.x,this.y,50,50);
