@@ -44,8 +44,8 @@ function setup(){
 	createCanvas(700,700);
 	colorMode(HSB,360,100,100,100);	
 	angleMode(DEGREES);
-	background(0,50);
-	console.log("updated")
+
+	console.log("updated2")
 	starSynth = new p5.PolySynth();
 	starReverb = new p5.Reverb();
 	starReverb.process(starSynth, 3, 2);
@@ -166,7 +166,7 @@ function loopSound3(timeFromNow){
 
 function mousePressed() {
 	userStartAudio();
-	
+
 	loop = new p5.SoundLoop(loopSound, interval/4);
 	loop2 = new p5.SoundLoop(loopSound2, interval2/4);
 	loop3 = new p5.SoundLoop(loopSound3,interval3/4);
