@@ -33,9 +33,9 @@ let orb;
 let changeColor = false;
 
 function preload() {
-	softDrum = loadSound("./samples/softDrumz.wav");
-	triangleSound = loadSound("./samples/ding.wav");
-	meditateFrog = loadImage("./images/meditate.png");
+	softDrum = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/softDrumz.wav");
+	triangleSound = loadSound("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/samples/ding.wav");
+	meditateFrog = loadImage("https://ashlyn-mcc.github.io/computational-art-spring2024/assignments/08_sound/images/meditate.png");
 	
   }
 
@@ -82,12 +82,7 @@ function setup(){
 		grasses.push(new Grass(random(width),random(350,height),random(10,40)))
 	}
 
-	loop = new p5.SoundLoop(loopSound, interval/4);
-	loop2 = new p5.SoundLoop(loopSound2, interval2/4);
-	loop3 = new p5.SoundLoop(loopSound3,interval3/4);
-	loop.start(); 
-	loop2.start(); 
-	loop3.start();
+
 }
 
 function draw(){
@@ -170,6 +165,10 @@ function loopSound3(timeFromNow){
 }
 
 function mousePressed() {
-	
-
+	loop = new p5.SoundLoop(loopSound, interval/4);
+	loop2 = new p5.SoundLoop(loopSound2, interval2/4);
+	loop3 = new p5.SoundLoop(loopSound3,interval3/4);
+	loop.start(); 
+	loop2.start(); 
+	loop3.start();
   }
