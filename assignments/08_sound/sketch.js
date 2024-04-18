@@ -165,6 +165,8 @@ function loopSound3(timeFromNow){
 }
 
 function mousePressed() {
+	userStartAudio();
+	
 	loop = new p5.SoundLoop(loopSound, interval/4);
 	loop2 = new p5.SoundLoop(loopSound2, interval2/4);
 	loop3 = new p5.SoundLoop(loopSound3,interval3/4);
