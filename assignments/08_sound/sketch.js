@@ -123,16 +123,13 @@ function draw(){
 		noFill();
 		ellipse(470,570,i)
 	}
-	// image(moonFrog,100,50,150,150);
-	// image(padFrog,900,500,200,200);
+	
 	image(meditateFrog,400,500,150,150)
-	// fill(100);
-	// ellipse(470,590,50,50);
+	
 
 	orb.show();
 
-	// increase offsets used for noise to alter the grass length
-	// makes it look like waves are washing up.
+	
 	for (let i = 0; i < pondOffsets.length; i++) {
 		pondOffsets[i] += 0.005
 	}
@@ -141,15 +138,11 @@ function draw(){
 }
 
 function loopSound(timeFromNow){
-
 	note = floor(random(0, scales[musicScale].length));
-	console.log(note);
 	currentNote = note;
-	console.log(note);
 	starSynth.play(midiToFreq(72 + scales[musicScale][note]), 0.5, timeFromNow, 0.3);
 	note++;
 	note = note % 8;
-	sixteenth++;
 }
 
 function loopSound2(timeFromNow){
