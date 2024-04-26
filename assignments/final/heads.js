@@ -7,7 +7,7 @@ class Head {
         console.log(this.color);
     }
 
-    showHead() {
+    show() {
         push();
         translate(this.position.x, this.position.y);
         fill(this.color);

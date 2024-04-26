@@ -93,14 +93,22 @@ class State2 {
         this.addComponentButton.displayButton();
         let clicked = this.addComponentButton.hoverButton();
         if (clicked){
-            let specsArray = this.head.getSpecs();
+            let specsArray = this.componentMenu[this.currentComponentIndex].getSpecs();
+
+            if (this.currentComponentIndex == 0){
             this.parts[0] = new Head(175,200,specsArray[0],specsArray[1]);
+            } else if (this.currentComponentIndex == 1){
+            this.parts[1] = new Body(175,400,specsArray[0],specsArray[1]);
+            }
             // x, y, color, head type (i)
 
         }
 
         if (this.parts.length > 0){
-            this.parts[0].showHead();
+            for (let i = 0; i < this.parts.length; i++)
+            if (this.parts[i] != null){
+                this.parts[i].show();
+            }
         }
 
 
