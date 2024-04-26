@@ -16,22 +16,40 @@ class State2 {
 
         this.justPressed = false;
 
-        this.componentButtons = new ComponentButtons();
+        //this.componentButtons = new ComponentButtons();
 
-        this.head = new SelectionHead(575,400);
+        this.componentButtons = [];
+
+        this.addComponentButton = new addComponent();
+
+       // this.head = new SelectionHead(575, 400);
+        this.componentMenu = [new SelectionHead(575,400), new SelectionBody(575,400)];
 
         this.colorPalette = [];
+
+        this.currentComponentIndex = 0;
 
         this.currentColor = color(80);
 
         this.colorIndex = 9;
 
-        this.colors = [color(0,45,55),color(40,60,75),color(55,60,90),color(100,45,55),color(200,60,55),color(290,45,55),color(340,25,75),color(100),color(30),color(75)]
+        this.parts = [];
+
+        this.buttonColors = [color(177, 76, 47), color(27, 70, 65), color(235, 35, 26), color(81, 28, 89), color(59, 40, 100)]
+
+        
+        for (let i = 0; i < 5; i++){
+            ellipse(425 + i * 75, 75, 50, 50);
+
+            this.componentButtons.push(new ComponentButtons(425 + i * 75, 75,this.buttonColors[i],i));
+        }
+
+        this.colors = [color(0, 45, 75), color(40, 60, 75), color(55, 60, 90), color(100, 45, 75), color(200, 60, 55), color(290, 45, 55), color(340, 25, 75), color(100), color(30), color(75)]
 
         let inc = 0;
-        for (let i = 0; i < 5; i++){
-            for (let j=0; j < 2; j++){
-                this.colorPalette.push(new ColorButton(375+i*50,635+j*35,30,this.colors[inc],inc));
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 2; j++) {
+                this.colorPalette.push(new ColorButton(375 + i * 50, 635 + j * 35, 20, this.colors[inc], inc));
                 inc++
             }
         }
@@ -47,14 +65,46 @@ class State2 {
 
         this.displayButtons();
 
+
         this.buttonFunction();
 
-        this.componentButtons.display();
+        // get value of component button
 
-        this.head.showHead(this.numComponent,this.colors[this.colorIndex]);
-        
-        console.log();
+        for (let i = 0; i < this.componentButtons.length; i++){
+            this.componentButtons[i].display();
+            this.componentButtons[i].hover();
+            this.componentButtons[i].clicked();
+
+            if (this.componentButtons[i].buttonClicked){
+                this.currentComponentIndex = this.componentButtons[i].index;
+                this.componentButtons[i].buttonClicked = false;
+            }
+            
+        }
+
+        this.componentMenu[this.currentComponentIndex].show(this.numComponent, this.colors[this.colorIndex])
+
+
+    
+
+
         this.colorButtons();
+
+        this.addComponentButton.displayButton();
+        let clicked = this.addComponentButton.hoverButton();
+        if (clicked){
+            let specsArray = this.head.getSpecs();
+            this.parts[0] = new Head(175,200,specsArray[0],specsArray[1]);
+            // x, y, color, head type (i)
+
+        }
+
+        if (this.parts.length > 0){
+            this.parts[0].showHead();
+        }
+
+
+
     }
 
     overButtons() {
@@ -77,7 +127,7 @@ class State2 {
         }
     }
 
-    buttonFunction(){
+    buttonFunction() {
         this.buttonUnderMouse = this.overButtons();
 
         if (this.buttonUnderMouse == 1) {
@@ -89,25 +139,25 @@ class State2 {
             this.hoverR = false;
         }
 
-        if (this.buttonUnderMouse == 1 && mouseIsPressed && this.justPressed == false){
+        if (this.buttonUnderMouse == 1 && mouseIsPressed && this.justPressed == false) {
             this.numComponent -= 1;
             this.justPressed = true;
             this.clickedFrameCount = frameCount;
-        } else if (this.buttonUnderMouse == 2 && mouseIsPressed && this.justPressed == false){
+        } else if (this.buttonUnderMouse == 2 && mouseIsPressed && this.justPressed == false) {
             this.numComponent += 1;
             this.justPressed = true;
             this.clickedFrameCount = frameCount;
 
         }
 
-        if (this.numComponent > 3){
+        if (this.numComponent > 3) {
             this.numComponent = 0;
-        } else if (this.numComponent < 0){
+        } else if (this.numComponent < 0) {
             this.numComponent = 3;
         }
 
-        if (this.justPressed){
-            if (frameCount - this.clickedFrameCount > 15){
+        if (this.justPressed) {
+            if (frameCount - this.clickedFrameCount > 15) {
                 this.justPressed = false;
             }
         }
@@ -119,14 +169,14 @@ class State2 {
         stroke(0);
         strokeWeight(1);
         if (this.hoverL) {
-            fill(75);
+            fill(81, 28, 89);
         } else {
             fill(27, 70, 65);
         }
         rect(this.leftButtonPos.x, this.leftButtonPos.y, this.buttonHeight, this.buttonWidth, 3);
 
         if (this.hoverR) {
-            fill(75)
+            fill(81, 28, 89)
         } else {
             fill(27, 70, 65);
 
@@ -139,40 +189,12 @@ class State2 {
 
     }
 
-    colorButtons(){
-        this.displayColorButtons();
-    }
-
-    displayColorButtons(){
-
-       for (let i = 0; i < this.colorPalette.length; i++){
-        this.colorPalette[i].display();
-        this.colorIndex = this.colorPalette[i].clicked(this.colorIndex);
-       }
-
-    }
-
-}
-
-class ColorButton{
-    constructor(x,y,size,color,index){
-        this.position = createVector(x,y);
-        this.size = size;
-        this.color = color;
-        this.index = index;
-    }
-
-    display(){
-        fill(this.color);
-        circle(this.position.x,this.position.y,this.size);
-    }
-
-    clicked(currentIndex){
-        if (mouseIsPressed && dist(mouseX,mouseY,this.position.x,this.position.y) < this.size/2){
-            return this.index;
-        } else {
-            return currentIndex;
+    colorButtons() {
+        for (let i = 0; i < this.colorPalette.length; i++) {
+            this.colorPalette[i].display();
+            this.colorIndex = this.colorPalette[i].clicked(this.colorIndex);
         }
     }
 
 }
+

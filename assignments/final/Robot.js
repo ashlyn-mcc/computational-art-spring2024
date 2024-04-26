@@ -1,9 +1,0 @@
-class Robot{
-    constructor(){
-
-    }
-
-    display(){
-
-    }
-}

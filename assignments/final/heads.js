@@ -1,36 +1,64 @@
-class Head{
+class Head {
 
-    constructor(headNum){
-        this.option = headNum;
+    constructor(x, y,col,i) {
+        this.position = createVector(x, y);
+        this.index = i;
+        this.color = col;
+        console.log(this.color);
     }
 
-    chooseHead(){
-        if (this.option == 0){
+    showHead() {
+        push();
+        translate(this.position.x, this.position.y);
+        fill(this.color);
+        strokeWeight(5);
+        scale(0.75);
+        if (this.index == 0) {
             this.squareHead();
-        } else if (this.option == 1){
-            this.rectHead();
-        } else if (this.option == 2){
+        } else if (this.index == 1) {
             this.circleHead();
+        } else if (this.index == 2) {
+            this.triHead();
         } else {
-            this.ellipseHead();
+            this.arcHead();
         }
+        strokeWeight(1);
+        stroke(0);
+        this.face();
+        pop();
     }
 
-    squareHead(){
-        
+    squareHead() {
+        rect(0, 0, 200, 200, 5);
     }
 
-    rectHead(){
-
+    triHead() {
+        triangle(0, -100, -100, 100, 100, 100)
     }
 
-    circleHead(){
-
+    circleHead() {
+        circle(0, 0, 200, 200);
     }
 
-    ellipseHead(){
-
+    arcHead() {
+        arc(0, 100, 200, 400, PI, 0)
     }
 
+    face() {
+        fill(100);
+        circle(-40, 0, 40);
+        circle(40, 0, 40);
+
+        fill(0);
+        circle(-32, -2, 20);
+        circle(42, -2, 20);
+
+        fill(100);
+        circle(-37, -5, 10)
+        circle(47, -5, 10)
+
+        fill(0);
+        rect(0, 55, 60, 5, 5);
+    }
 
 }

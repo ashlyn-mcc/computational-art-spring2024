@@ -1,71 +1,34 @@
-class ComponentButtons{
-    constructor(){
-        this.colors = [color(177,76,47),color(27,70,65),color(235,35,26),color(81,28,89),color(59,40,100)]
+class ComponentButtons {
+    constructor(x,y,col,i) {
+        this.color = col;
+        this.x = x;
+        this.y = y;
+        this.size = 50;
+        this.originalSize = this.size;
+        this.overButton = false;
+        this.index = i
+        this.buttonClicked = false;
     }
 
-    display(){
-        for (let i = 0; i < 5; i++){
-            fill(this.colors[i]);
-            ellipse(425+i*75,75,50,50);
-        }
-    }
-}
-
-class SelectionHead{
-    constructor(x,y){
-        this.position = createVector(x,y);
+    display() {
+        fill(this.color);
+        ellipse(this.x, this.y, this.size ,this.size);
     }
 
-    showHead(i,col){
-        push();
-        translate(this.position.x,this.position.y);
-        fill(col);
-        strokeWeight(5);
-        if (i == 0){
-            this.squareHead();
-        } else if (i == 1){
-            this.circleHead();
-        } else if (i == 2){
-            this.triHead();
+    hover(){
+        if (dist(mouseX,mouseY,this.x,this.y) < 25){
+            this.size = 75;
+            this.overButton = true;
         } else {
-            this.arcHead();
+            this.overButton = false;
+            this.size = this.originalSize;
         }
-        strokeWeight(1);
-        stroke(0);
-        this.face();
-        pop();
     }
 
-    squareHead(){
-        rect(0,0,200,200,5);
-    }
-
-    triHead(){
-        triangle(0,-100,-100,100,100,100)
-    }
-
-    circleHead(){
-        circle(0,0,200,200);
-    }
-
-    arcHead(){
-        arc(0,100,200,400,PI,0)
-    }
-
-    face(){
-        fill(100);
-        circle(-40,0,40);
-        circle(40,0,40);
-
-        fill(0);
-        circle(-32,-2,20);
-        circle(32,-2,20);
-
-        fill(100);
-        circle(-37,-5,10)
-        circle(37,-5,10)
-
-        fill(0);
-        rect(0,55,60,5,5);
+    clicked(){
+        if (this.overButton && mouseIsPressed){
+            this.buttonClicked = true;
+        }
     }
 }
+
