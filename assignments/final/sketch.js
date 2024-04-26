@@ -22,7 +22,7 @@ function setup(){
 
 	state1 = new State1();
 	state2 = new State2();
-	currentState = state1;
+	currentState = state2;
 }
 
 function draw(){
