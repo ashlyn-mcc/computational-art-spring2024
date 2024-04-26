@@ -23,7 +23,7 @@ class State2 {
         this.addComponentButton = new addComponent();
 
        // this.head = new SelectionHead(575, 400);
-        this.componentMenu = [new SelectionHead(575,400), new SelectionBody(575,400)];
+        this.componentMenu = [new SelectionHead(575,400), new SelectionBody(575,400), new SelectionArms(575,400)];
 
         this.colorPalette = [];
 
@@ -99,6 +99,8 @@ class State2 {
             this.parts[0] = new Head(175,200,specsArray[0],specsArray[1]);
             } else if (this.currentComponentIndex == 1){
             this.parts[1] = new Body(175,400,specsArray[0],specsArray[1]);
+            } else if (this.currentComponentIndex == 2){
+            this.parts[2] = new Arms(175,400,specsArray[0],specsArray[1]);
             }
             // x, y, color, head type (i)
 

@@ -10,6 +10,8 @@ class Head {
     show() {
         push();
         translate(this.position.x, this.position.y);
+        fill(20);
+        ellipse(0,75,75,75);
         fill(this.color);
         strokeWeight(5);
         scale(0.75);

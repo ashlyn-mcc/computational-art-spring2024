@@ -31,8 +31,8 @@ class Body {
     }
 
     domeBody() {
-        arc(0, -50, 200, 200, PI, 0)
-        rect(0,50,200,200,5);
+        arc(0, -50, 250, 200, PI, 0)
+        rect(0,50,250,200,5);
     }
 
     trapBody() {
