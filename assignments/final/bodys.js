@@ -9,8 +9,11 @@ class Body {
     show() {
         push();
         translate(this.position.x, this.position.y);
+        scale(0.75)    
+        fill(20);
+        ellipse(120,-110,75,75);
+        ellipse(-120,-110,75,75);
         fill(this.color);  
-        scale(0.75)     
         strokeWeight(5);
         if (this.index == 0) {
             this.pipeBody();

@@ -28,7 +28,7 @@ class Arms {
 
     ballArms() {
         push();
-        translate(90, -105);
+        translate(135, -105);
         push();
         translate(0, 40);
         rotate(5 * PI / 6)
@@ -41,7 +41,7 @@ class Arms {
         pop();
 
         push();
-        translate(-90, -105);
+        translate(-135, -105);
         push();
         translate(-60, 65);
         rotate(PI / 6)
@@ -56,14 +56,14 @@ class Arms {
 
     triArms() {
         push();
-        translate(90, -105);
+        translate(145, -105);
         triangle(30,90,0,250,45,125);
         triangle(-17,18,18,18,45,125);
         rect(0, 0, 50, 50);
         pop();
 
         push();
-        translate(-90, -105);
+        translate(-145, -105);
         triangle(-30,90,0,250,-45,125);
         triangle(17,18,-18,18,-45,125);
         rect(0, 0, 50, 50);
@@ -72,7 +72,7 @@ class Arms {
 
     blockArms() {
         push();
-        translate(110, -105);
+        translate(145, -105);
         rect(20,100,10,200)
         ellipse(0,0,60,40);
         rect(20,200,50,10);
@@ -81,7 +81,7 @@ class Arms {
         pop();
 
         push();
-        translate(-110, -105);
+        translate(-145, -105);
         rect(-20,100,10,200)
         ellipse(0,0,60,40);
         rect(-20,200,50,10);
@@ -92,14 +92,14 @@ class Arms {
 
     starArms() {
         push();
-        translate(90, -95);
+        translate(120, -95);
         line(15,0,55,200);
         triangle(0,-30,0,20,30,-5);
         this.star(55, 200, 15, 35, 5);
         pop();
 
         push();
-        translate(-90, -95);
+        translate(-120, -95);
         line(-15,0,-55,200);
         triangle(0,-30,0,20,-30,-5);
         this.star(-55, 200, 15, 35, 5);
