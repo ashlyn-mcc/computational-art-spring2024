@@ -8,11 +8,13 @@ let state1, state2, state3, state4;
 
 let headPic, bodyPic, armPic, legPic, topPic;
 
+let parts = [];
+
 let partsImgs = [];
 
-let partText = ["Head","Body","Arms","Legs"]
+let partText = ["Head", "Body", "Arms", "Legs"]
 
-function preload(){
+function preload() {
 	titleFont = loadFont("./CyborgPunk.ttf");
 	subFont = loadFont("./goodtiming.otf");
 	wrenchPic = loadImage("./wrench.png");
@@ -26,22 +28,23 @@ function preload(){
 
 }
 
-function setup(){
-	createCanvas(800,700);
-	colorMode(HSB,360,100,100,100);
+function setup() {
+	createCanvas(800, 700);
+	colorMode(HSB, 360, 100, 100, 100);
 	rectMode(CENTER);
-	textAlign(CENTER,CENTER);
+	textAlign(CENTER, CENTER);
 	imageMode(CENTER);
 
-	partsImgs = [headPic,bodyPic,armPic,legPic,topPic];
+	partsImgs = [headPic, bodyPic, armPic, legPic, topPic];
 
 	state1 = new State1();
 	state2 = new State2();
+	state3 = new State3();
 	currentState = state1;
 }
 
-function draw(){
-	background(207,21,62);
+function draw() {
+	background(207, 21, 62);
 	currentState.draw();
 
 }

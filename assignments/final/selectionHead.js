@@ -25,7 +25,7 @@ class SelectionHead {
         pop();
     }
 
-    getSpecs(){
+    getSpecs() {
         return [this.color, this.index];
     }
 

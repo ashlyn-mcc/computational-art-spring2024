@@ -12,17 +12,19 @@ class State2 {
         this.numComponent = 0;
         this.buttonUnderMouse = 0;
 
+        this.nextButtonPosition = createVector(700,670);
+        this.nextButtonWidth = 125;
+        this.nextButtonHeight = 40;
+        this.fade = 0;
+
         this.clickedFrameCount = 0;
 
         this.justPressed = false;
-
-        //this.componentButtons = new ComponentButtons();
 
         this.componentButtons = [];
 
         this.addComponentButton = new addComponent();
 
-        // this.head = new SelectionHead(575, 400);
         this.componentMenu = [new SelectionHead(575, 400), new SelectionBody(575, 400), new SelectionArms(575, 400), new SelectionLegs(575, 350)];
 
         this.colorPalette = [];
@@ -33,14 +35,12 @@ class State2 {
 
         this.colorIndex = 9;
 
-        this.parts = [];
+        this.changeState = false;
 
         this.buttonColors = [color(177, 76, 47), color(27, 70, 65), color(235, 35, 26), color(81, 28, 89)]
 
 
         for (let i = 0; i < 4; i++) {
-            //ellipse(475 + i * 75, 75, 50, 50);
-
             this.componentButtons.push(new ComponentButtons(425 + i * 100, 150, this.buttonColors[i], i));
         }
 
@@ -53,6 +53,8 @@ class State2 {
                 inc++
             }
         }
+
+
     }
 
     draw() {
@@ -102,27 +104,41 @@ class State2 {
             let specsArray = this.componentMenu[this.currentComponentIndex].getSpecs();
 
             if (this.currentComponentIndex == 0) {
-                this.parts[0] = new Head(175, 150, specsArray[0], specsArray[1]);
+                parts[0] = new Head(175, 150, specsArray[0], specsArray[1]);
             } else if (this.currentComponentIndex == 1) {
-                this.parts[2] = new Body(175, 350, specsArray[0], specsArray[1]);
+                parts[2] = new Body(175, 350, specsArray[0], specsArray[1]);
             } else if (this.currentComponentIndex == 2) {
-                this.parts[3] = new Arms(175, 350, specsArray[0], specsArray[1]);
+                parts[3] = new Arms(175, 350, specsArray[0], specsArray[1]);
             } else if (this.currentComponentIndex == 3) {
-                this.parts[1] = new Legs(175, 500, specsArray[0], specsArray[1]);
+                parts[1] = new Legs(175, 500, specsArray[0], specsArray[1]);
             }
-            // x, y, color, head type (i)
 
         }
 
-        if (this.parts.length > 0) {
-            for (let i = 0; i < this.parts.length; i++)
-                if (this.parts[i] != null) {
-                    this.parts[i].show();
+        if (parts.length > 0) {
+            for (let i = 0; i < parts.length; i++)
+                if (parts[i] != null) {
+                    parts[i].show();
                 }
         }
 
+        let numParts = 0;
+        for (let i = 0; i < 4; i++){
+            if (parts[i] != null){
+                numParts += 1
+            }
+        }
 
 
+        if (numParts == 4){
+        this.isButtonClicked();
+        this.changeStateButton();
+        if (this.changeState){
+        this.nextState();
+        }
+        fill(0,this.fade);
+        rect(width/2,height/2,width,height);
+    }
     }
 
     overButtons() {
@@ -211,6 +227,47 @@ class State2 {
         for (let i = 0; i < this.colorPalette.length; i++) {
             this.colorPalette[i].display();
             this.colorIndex = this.colorPalette[i].clicked(this.colorIndex);
+        }
+    }
+
+    changeStateButton(){
+        console.log("entered")
+        rect(this.nextButtonPosition.x,this.nextButtonPosition.y,this.nextButtonWidth,this.nextButtonHeight,5);
+        fill(235, 35, 26);
+        textFont(subFont);
+        strokeWeight(0.5);
+        textSize(15);
+        text("Done", this.nextButtonPosition.x, this.nextButtonPosition.y)
+    }
+
+
+    // Checks if the mouse was over the button when it clicked
+    isButtonClicked() {
+
+        let xBound = this.nextButtonWidth / 2;
+        let yBound = this.nextButtonHeight / 2;
+
+        if (mouseX > this.nextButtonPosition.x - xBound &&
+            mouseX < this.nextButtonPosition.x + xBound &&
+            mouseY > this.nextButtonPosition.y - yBound &&
+            mouseY < this.nextButtonPosition.y + yBound) {
+                fill(81, 28, 89);
+            if (mouseIsPressed){
+            this.changeState = true;
+            }
+        } else {
+            fill(27, 70, 65)
+        }
+    }
+
+    // Changes to next state
+    nextState() {
+        if (this.fade <= 100) {
+            this.fade += 1;
+        }
+
+        if (this.fade > 100) {
+            currentState = state3;
         }
     }
 

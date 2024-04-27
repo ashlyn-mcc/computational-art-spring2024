@@ -22,27 +22,27 @@ class SelectionBody {
         pop();
     }
 
-    getSpecs(){
+    getSpecs() {
         return [this.color, this.index];
     }
 
 
     pipeBody() {
         rect(0, 0, 200, 250, 5);
-        rect(0,-125,250,40,5);
-        rect(0,125,250,40,5);
+        rect(0, -125, 250, 40, 5);
+        rect(0, 125, 250, 40, 5);
     }
 
     domeBody() {
         arc(0, -50, 250, 200, PI, 0)
-        rect(0,50,250,200,5);
+        rect(0, 50, 250, 200, 5);
     }
 
     trapBody() {
-        quad(-100,-150,100,-150,75,150,-75,150);
+        quad(-100, -150, 100, -150, 75, 150, -75, 150);
     }
 
     boxBody() {
-        rect(0,0,250,300,15);
+        rect(0, 0, 250, 300, 15);
     }
 }

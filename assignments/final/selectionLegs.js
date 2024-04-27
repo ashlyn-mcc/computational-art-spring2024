@@ -22,7 +22,7 @@ class SelectionLegs {
         pop();
     }
 
-    getSpecs(){
+    getSpecs() {
         return [this.color, this.index];
     }
 
@@ -30,72 +30,72 @@ class SelectionLegs {
     blockLegs() {
         push();
         translate(50, 0);
-        rect(0,175,50,20,5);
-        rect(0,100,25,125,5);
-        rect(0,0,50,150,5);
+        rect(0, 175, 50, 20, 5);
+        rect(0, 100, 25, 125, 5);
+        rect(0, 0, 50, 150, 5);
         pop();
 
         push();
         translate(-50, 0);
-        rect(0,175,50,20,5);
-        rect(0,100,25,125,5);
-        rect(0,0,50,150,5);
+        rect(0, 175, 50, 20, 5);
+        rect(0, 100, 25, 125, 5);
+        rect(0, 0, 50, 150, 5);
         pop();
     }
 
     trapLegs() {
         push();
-        translate(50,0);
-        ellipse(0,175,60,20);
-        triangle(-25,-75,25,-75,0,75);
-        triangle(-25,175,25,175,0,75);
-        ellipse(0,70,40,40);
+        translate(50, 0);
+        ellipse(0, 175, 60, 20);
+        triangle(-25, -75, 25, -75, 0, 75);
+        triangle(-25, 175, 25, 175, 0, 75);
+        ellipse(0, 70, 40, 40);
         pop();
 
         push();
-        translate(-50,0);
-        ellipse(0,175,60,20);
-        triangle(-25,-75,25,-75,0,75);
-        triangle(-25,175,25,175,0,75);
-        ellipse(0,70,40,40);
+        translate(-50, 0);
+        ellipse(0, 175, 60, 20);
+        triangle(-25, -75, 25, -75, 0, 75);
+        triangle(-25, 175, 25, 175, 0, 75);
+        ellipse(0, 70, 40, 40);
         pop();
     }
 
     bubbleLegs() {
         push();
-        translate(50,0);
-        rect(0,75,15,215)
-        circle(0,-50,40);
-        circle(0,40,40);
-        circle(0,125,40);
-        ellipse(0,180,50,30);
+        translate(50, 0);
+        rect(0, 75, 15, 215)
+        circle(0, -50, 40);
+        circle(0, 40, 40);
+        circle(0, 125, 40);
+        ellipse(0, 180, 50, 30);
         pop();
 
         push();
-        translate(-50,0);
-        rect(0,75,15,215)
-        circle(0,-50,40);
-        circle(0,40,40);
-        circle(0,125,40);
-        ellipse(0,180,50,30);
+        translate(-50, 0);
+        rect(0, 75, 15, 215)
+        circle(0, -50, 40);
+        circle(0, 40, 40);
+        circle(0, 125, 40);
+        ellipse(0, 180, 50, 30);
         pop();
     }
 
     ellipseLegs() {
         push();
-        translate(50,0);
-        ellipse(0,-25,40,100);
-        ellipse(0,110,25,125);
-        ellipse(0,40,40,40);
-        ellipse(0,180,30,30);
+        translate(50, 0);
+        ellipse(0, -25, 40, 100);
+        ellipse(0, 110, 25, 125);
+        ellipse(0, 40, 40, 40);
+        ellipse(0, 180, 30, 30);
         pop();
 
         push();
-        translate(-50,0);
-        ellipse(0,-25,40,100);
-        ellipse(0,110,25,125);
-        ellipse(0,40,40,40);
-        ellipse(0,180,30,30);
+        translate(-50, 0);
+        ellipse(0, -25, 40, 100);
+        ellipse(0, 110, 25, 125);
+        ellipse(0, 40, 40, 40);
+        ellipse(0, 180, 30, 30);
         pop();
     }
 }

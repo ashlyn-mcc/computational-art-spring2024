@@ -59,50 +59,50 @@ class SelectionArms {
         push();
         translate(40, -100);
         rect(0, 0, 36, 36);
-        triangle(30,90,0,250,45,125);
-        triangle(-17,18,18,18,45,125);
+        triangle(30, 90, 0, 250, 45, 125);
+        triangle(-17, 18, 18, 18, 45, 125);
         pop();
 
         push();
         translate(-40, -100);
         rect(0, 0, 36, 36);
-        triangle(-30,90,0,250,-45,125);
-        triangle(17,18,-18,18,-45,125);
+        triangle(-30, 90, 0, 250, -45, 125);
+        triangle(17, 18, -18, 18, -45, 125);
         pop();
     }
 
     blockArms() {
         push();
         translate(40, -100);
-        rect(20,100,10,200)
-        ellipse(0,0,60,30);
-        rect(20,200,50,10);
-        rect(-5,210,10,30)
-        rect(45,210,10,30)
+        rect(20, 100, 10, 200)
+        ellipse(0, 0, 60, 30);
+        rect(20, 200, 50, 10);
+        rect(-5, 210, 10, 30)
+        rect(45, 210, 10, 30)
         pop();
 
         push();
         translate(-40, -100);
-        rect(-20,100,10,200)
-        ellipse(0,0,60,30);
-        rect(-20,200,50,10);
-        rect(5,210,10,30)
-        rect(-45,210,10,30)
+        rect(-20, 100, 10, 200)
+        ellipse(0, 0, 60, 30);
+        rect(-20, 200, 50, 10);
+        rect(5, 210, 10, 30)
+        rect(-45, 210, 10, 30)
         pop();
     }
 
     starArms() {
         push();
         translate(40, -100);
-        line(15,0,55,200);
-        triangle(0,-30,0,20,30,-5);
+        line(15, 0, 55, 200);
+        triangle(0, -30, 0, 20, 30, -5);
         this.star(55, 200, 15, 35, 5);
         pop();
 
         push();
         translate(-40, -100);
-        line(-15,0,-55,200);
-        triangle(0,-30,0,20,-30,-5);
+        line(-15, 0, -55, 200);
+        triangle(0, -30, 0, 20, -30, -5);
         this.star(-55, 200, 15, 35, 5);
         pop();
     }
@@ -112,13 +112,13 @@ class SelectionArms {
         let halfAngle = angle / 2.0;
         beginShape();
         for (let a = 0; a < TWO_PI; a += angle) {
-          let sx = x + cos(a) * radius2;
-          let sy = y + sin(a) * radius2;
-          vertex(sx, sy);
-          sx = x + cos(a + halfAngle) * radius1;
-          sy = y + sin(a + halfAngle) * radius1;
-          vertex(sx, sy);
+            let sx = x + cos(a) * radius2;
+            let sy = y + sin(a) * radius2;
+            vertex(sx, sy);
+            sx = x + cos(a + halfAngle) * radius1;
+            sy = y + sin(a + halfAngle) * radius1;
+            vertex(sx, sy);
         }
         endShape(CLOSE);
-      }
+    }
 }
