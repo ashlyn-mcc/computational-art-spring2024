@@ -10,7 +10,7 @@ let headPic, bodyPic, armPic, legPic, topPic;
 
 let partsImgs = [];
 
-let partText = ["Head","Body","Arms","Legs","Top"]
+let partText = ["Head","Body","Arms","Legs"]
 
 function preload(){
 	titleFont = loadFont("./CyborgPunk.ttf");

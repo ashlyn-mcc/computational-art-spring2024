@@ -22,8 +22,8 @@ class State2 {
 
         this.addComponentButton = new addComponent();
 
-       // this.head = new SelectionHead(575, 400);
-        this.componentMenu = [new SelectionHead(575,400), new SelectionBody(575,400), new SelectionArms(575,400), new SelectionLegs(575,400)];
+        // this.head = new SelectionHead(575, 400);
+        this.componentMenu = [new SelectionHead(575, 400), new SelectionBody(575, 400), new SelectionArms(575, 400), new SelectionLegs(575, 350)];
 
         this.colorPalette = [];
 
@@ -35,13 +35,13 @@ class State2 {
 
         this.parts = [];
 
-        this.buttonColors = [color(177, 76, 47), color(27, 70, 65), color(235, 35, 26), color(81, 28, 89), color(59, 40, 100)]
+        this.buttonColors = [color(177, 76, 47), color(27, 70, 65), color(235, 35, 26), color(81, 28, 89)]
 
-        
-        for (let i = 0; i < 5; i++){
-            ellipse(425 + i * 75, 75, 50, 50);
 
-            this.componentButtons.push(new ComponentButtons(425 + i * 75, 75,this.buttonColors[i],i));
+        for (let i = 0; i < 4; i++) {
+            //ellipse(475 + i * 75, 75, 50, 50);
+
+            this.componentButtons.push(new ComponentButtons(425 + i * 100, 150, this.buttonColors[i], i));
         }
 
         this.colors = [color(0, 45, 75), color(40, 60, 75), color(55, 60, 90), color(100, 45, 75), color(200, 60, 55), color(290, 45, 55), color(340, 25, 75), color(100), color(30), color(75)]
@@ -49,7 +49,7 @@ class State2 {
         let inc = 0;
         for (let i = 0; i < 5; i++) {
             for (let j = 0; j < 2; j++) {
-                this.colorPalette.push(new ColorButton(375 + i * 50, 635 + j * 35, 20, this.colors[inc], inc));
+                this.colorPalette.push(new ColorButton(375 + i * 50, 615 + j * 50, 25, this.colors[inc], inc));
                 inc++
             }
         }
@@ -58,10 +58,16 @@ class State2 {
     draw() {
         background(0);
 
-        fill(90);
+        fill(81, 28, 89);
         rect(175, height / 2, 350, height);
         fill(207, 21, 62);
         rect(576, height / 2, 450, height);
+
+        fill(235, 35, 26)
+        textSize(35);
+        stroke(81, 28, 89)
+        text("Build Your Bot", 575, 50);
+        stroke(0);
 
         this.displayButtons();
 
@@ -70,49 +76,49 @@ class State2 {
 
         // get value of component button
 
-        for (let i = 0; i < this.componentButtons.length; i++){
+        for (let i = 0; i < this.componentButtons.length; i++) {
             this.componentButtons[i].display();
             this.componentButtons[i].hover();
             this.componentButtons[i].clicked();
 
-            if (this.componentButtons[i].buttonClicked){
+            if (this.componentButtons[i].buttonClicked) {
                 this.currentComponentIndex = this.componentButtons[i].index;
                 this.componentButtons[i].buttonClicked = false;
             }
-            
+
         }
 
         this.componentMenu[this.currentComponentIndex].show(this.numComponent, this.colors[this.colorIndex])
 
 
-    
+
 
 
         this.colorButtons();
 
         this.addComponentButton.displayButton();
         let clicked = this.addComponentButton.hoverButton();
-        if (clicked){
+        if (clicked) {
             let specsArray = this.componentMenu[this.currentComponentIndex].getSpecs();
 
-            if (this.currentComponentIndex == 0){
-            this.parts[0] = new Head(175,150,specsArray[0],specsArray[1]);
-            } else if (this.currentComponentIndex == 1){
-            this.parts[2] = new Body(175,350,specsArray[0],specsArray[1]);
-            } else if (this.currentComponentIndex == 2){
-            this.parts[3] = new Arms(175,350,specsArray[0],specsArray[1]);
-            } else if (this.currentComponentIndex == 3){
-                this.parts[1] = new Legs(175,500,specsArray[0],specsArray[1]);
+            if (this.currentComponentIndex == 0) {
+                this.parts[0] = new Head(175, 150, specsArray[0], specsArray[1]);
+            } else if (this.currentComponentIndex == 1) {
+                this.parts[2] = new Body(175, 350, specsArray[0], specsArray[1]);
+            } else if (this.currentComponentIndex == 2) {
+                this.parts[3] = new Arms(175, 350, specsArray[0], specsArray[1]);
+            } else if (this.currentComponentIndex == 3) {
+                this.parts[1] = new Legs(175, 500, specsArray[0], specsArray[1]);
             }
             // x, y, color, head type (i)
 
         }
 
-        if (this.parts.length > 0){
+        if (this.parts.length > 0) {
             for (let i = 0; i < this.parts.length; i++)
-            if (this.parts[i] != null){
-                this.parts[i].show();
-            }
+                if (this.parts[i] != null) {
+                    this.parts[i].show();
+                }
         }
 
 
