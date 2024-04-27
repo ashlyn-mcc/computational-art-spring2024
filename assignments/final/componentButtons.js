@@ -13,6 +13,14 @@ class ComponentButtons {
     display() {
         fill(this.color);
         ellipse(this.x, this.y, this.size ,this.size);
+        image(partsImgs[this.index],this.x,this.y,this.size/2,this.size/2);
+
+        if (this.overButton){
+            push();
+            strokeWeight(0.5);
+            text(partText[this.index],this.x,this.y + this.size/1.5)
+            pop();
+        }
     }
 
     hover(){

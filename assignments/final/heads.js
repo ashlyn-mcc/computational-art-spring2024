@@ -4,7 +4,6 @@ class Head {
         this.position = createVector(x, y);
         this.index = i;
         this.color = col;
-        console.log(this.color);
     }
 
     show() {

@@ -29,6 +29,7 @@ class Arms {
     ballArms() {
         push();
         translate(135, -105);
+        rotate(PI/10);
         push();
         translate(0, 40);
         rotate(5 * PI / 6)
@@ -42,6 +43,7 @@ class Arms {
 
         push();
         translate(-135, -105);
+        rotate(-12.5*PI/6);
         push();
         translate(-60, 65);
         rotate(PI / 6)
@@ -59,14 +61,14 @@ class Arms {
         translate(145, -105);
         triangle(30,90,0,250,45,125);
         triangle(-17,18,18,18,45,125);
-        rect(0, 0, 50, 50);
+        rect(0, 0, 50, 50,5);
         pop();
 
         push();
         translate(-145, -105);
         triangle(-30,90,0,250,-45,125);
         triangle(17,18,-18,18,-45,125);
-        rect(0, 0, 50, 50);
+        rect(0, 0, 50, 50,5);
         pop();
     }
 
