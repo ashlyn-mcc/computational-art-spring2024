@@ -26,7 +26,7 @@ class ComponentButtons {
 
     hover() {
         if (dist(mouseX, mouseY, this.x, this.y) < 32.5) {
-            this.size = 85;
+            this.size = 90;
             this.overButton = true;
         } else {
             this.overButton = false;

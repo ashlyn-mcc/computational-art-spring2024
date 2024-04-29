@@ -44,7 +44,7 @@ class State2 {
             this.componentButtons.push(new ComponentButtons(425 + i * 100, 150, this.buttonColors[i], i));
         }
 
-        this.colors = [color(0, 45, 75), color(40, 60, 75), color(55, 60, 90), color(100, 45, 75), color(200, 60, 55), color(290, 45, 55), color(340, 25, 75), color(100), color(30), color(75)]
+        this.colors = [color(0, 45, 75), color(40, 60, 95), color(55, 60, 90), color(100, 45, 75), color(200, 60, 55), color(290, 45, 55), color(340, 25, 75), color(100), color(50), color(75)]
 
         let inc = 0;
         for (let i = 0; i < 5; i++) {
