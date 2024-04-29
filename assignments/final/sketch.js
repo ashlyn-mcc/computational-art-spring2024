@@ -6,7 +6,7 @@ let wrenchPic, gearPic;
 
 let state1, state2, state3, state4;
 
-let headPic, bodyPic, armPic, legPic, topPic;
+let headPic, bodyPic, armPic, legPic;
 
 let parts = [];
 
@@ -24,7 +24,6 @@ function preload() {
 	bodyPic = loadImage("./body.png");
 	armPic = loadImage("./arm.png");
 	legPic = loadImage("./leg.png");
-	topPic = loadImage("./top.png");
 
 }
 
@@ -35,11 +34,12 @@ function setup() {
 	textAlign(CENTER, CENTER);
 	imageMode(CENTER);
 
-	partsImgs = [headPic, bodyPic, armPic, legPic, topPic];
+	partsImgs = [headPic, bodyPic, armPic, legPic];
 
 	state1 = new State1();
 	state2 = new State2();
 	state3 = new State3();
+	state4 = new State4();
 	currentState = state1;
 }
 

@@ -8,7 +8,11 @@ class Body {
 
     show() {
         push();
-        translate(this.position.x, this.position.y);
+        if (currentState != state3){
+            translate(this.position.x, this.position.y);
+            } else {
+                translate(400,400);
+            }
         scale(0.75)
         fill(20);
         ellipse(120, -110, 75, 75);

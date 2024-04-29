@@ -8,7 +8,11 @@ class Legs {
 
     show() {
         push();
-        translate(this.position.x, this.position.y);
+        if (currentState != state3){
+            translate(this.position.x, this.position.y);
+            } else {
+                translate(400,550);
+            }
         fill(20);
         ellipse(-45, -65, 40, 75)
         ellipse(45, -65, 40, 75)

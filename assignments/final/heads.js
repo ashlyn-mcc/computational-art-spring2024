@@ -8,7 +8,11 @@ class Head {
 
     show() {
         push();
-        translate(this.position.x, this.position.y);
+        if (currentState != state3) {
+            translate(this.position.x, this.position.y);
+        } else {
+            translate(400, 200);
+        }
         fill(20);
         ellipse(0, 75, 75, 75);
         fill(this.color);

@@ -8,7 +8,12 @@ class Arms {
 
     show() {
         push();
+
+        if (currentState != state3){
         translate(this.position.x, this.position.y);
+        } else {
+            translate(400,400);
+        }
         fill(this.color);
         strokeWeight(5);
         scale(.85)

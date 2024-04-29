@@ -33,13 +33,12 @@ class State1 {
 
         this.showImages();
 
+        // If mouse is clicked, check if mouse was over the button
+        this.isButtonClicked();
+
         // draws the button
         this.showButton();
 
-        // If mouse is clicked, check if mouse was over the button
-        if (mouseIsPressed) {
-            this.isButtonClicked();
-        }
 
         // If its time to go to state 2, change the current state
         if (this.changeState == true) {
@@ -54,7 +53,6 @@ class State1 {
 
     // Displays the "Enter the Lab" button
     showButton() {
-        fill(235, 35, 26);
         rect(this.buttonPosition.x, this.buttonPosition.y + 3, this.buttonWidth, this.buttonHeight, 5);
         fill(100, 65);
         textFont(subFont);
@@ -90,7 +88,12 @@ class State1 {
             mouseX < this.buttonPosition.x + xBound &&
             mouseY > this.buttonPosition.y - yBound &&
             mouseY < this.buttonPosition.y + yBound) {
+            fill(81, 28, 89)
+            if (mouseIsPressed){
             this.changeState = true;
+            }
+        } else {
+            fill(235, 35, 26);
         }
     }
 
