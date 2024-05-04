@@ -2,18 +2,19 @@
 
 class State4{
     constructor(){
-        this.stars = [];
-        for (let i = 0; i < 200; i++){
-            this.stars.push(new Star());
-        }
+        
+
     }
 
     draw(){
+        lava.show();
+
     background(0)
 
-    for (let i = 0; i < this.stars.length; i++){
-        this.stars[i].show();
-    }
+
+    image(room,width/2,height/2,width,height);
+    lava.position(0,height-300)
+    lava.size(width,300)
     
     for (let i = 0; i < parts.length; i++) {
         push();

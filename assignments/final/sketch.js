@@ -14,6 +14,8 @@ let partsImgs = [];
 
 let partText = ["Head", "Body", "Arms", "Legs"]
 
+let room, lava;
+
 function preload() {
 	titleFont = loadFont("./CyborgPunk.ttf");
 	subFont = loadFont("./goodtiming.otf");
@@ -24,6 +26,11 @@ function preload() {
 	bodyPic = loadImage("./body.png");
 	armPic = loadImage("./arm.png");
 	legPic = loadImage("./leg.png");
+
+	room = loadImage("./room.jpeg");
+	lava = createImg('./lava.gif');
+
+	lava.hide();
 
 }
 
@@ -40,7 +47,7 @@ function setup() {
 	state2 = new State2();
 	state3 = new State3();
 	state4 = new State4();
-	currentState = state1;
+	currentState = state2;
 }
 
 function draw() {
