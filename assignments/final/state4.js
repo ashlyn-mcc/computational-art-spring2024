@@ -2,8 +2,8 @@
 
 class State4{
     constructor(){
-        
-
+        this.platform = new Platform();
+        this.arrowEmitter = new ArrowEmitter();
     }
 
     draw(){
@@ -12,10 +12,13 @@ class State4{
     background(0)
 
 
+    tint(100,75);
     image(room,width/2,height/2,width,height);
     lava.position(0,height-300)
     lava.size(width,300)
     
+    this.platform.show();
+
     for (let i = 0; i < parts.length; i++) {
         push();
         translate(350, 300);
@@ -26,7 +29,25 @@ class State4{
         pop();
     }
 
+    fill(20,90);
+    rect(width/2,0,width,150);
+
+    this.arrowEmitter.update();
+    
+    push();
+    noFill();
+    strokeWeight(10);
+    stroke(0);
+    ellipse(width/2,35,65,65)
+    ellipse(width/2,35,75,75)
+    stroke(75);
+    ellipse(width/2,35,70,70)
+    pop();
+
+   
+
     }
+
     
 }
 

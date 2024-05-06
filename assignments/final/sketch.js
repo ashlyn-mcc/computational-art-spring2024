@@ -28,7 +28,7 @@ function preload() {
 	legPic = loadImage("./leg.png");
 
 	room = loadImage("./room.jpeg");
-	lava = createImg('./lava.gif');
+	lava = createImg('./lava2.gif');
 
 	lava.hide();
 
@@ -47,7 +47,7 @@ function setup() {
 	state2 = new State2();
 	state3 = new State3();
 	state4 = new State4();
-	currentState = state2;
+	currentState = state4;
 }
 
 function draw() {
