@@ -55,6 +55,7 @@ class State2 {
         }
 
 
+
     }
 
     draw() {
@@ -253,6 +254,7 @@ class State2 {
             mouseY < this.nextButtonPosition.y + yBound) {
                 fill(81, 28, 89);
             if (mouseIsPressed){
+                click.play();
             this.changeState = true;
             }
         } else {

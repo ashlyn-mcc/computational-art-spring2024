@@ -14,6 +14,7 @@ class State1 {
         this.fade = 0;
         this.changeState = false;
 
+        buildMusic.play();
     }
 
     draw() {
@@ -91,6 +92,7 @@ class State1 {
             fill(81, 28, 89)
             if (mouseIsPressed){
             this.changeState = true;
+            click.play()
             }
         } else {
             fill(235, 35, 26);

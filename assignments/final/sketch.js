@@ -16,6 +16,10 @@ let partText = ["Head", "Body", "Arms", "Legs"]
 
 let room, lava;
 
+let littleClick, click;
+
+let introMusic, buildMusic, gameMusic;
+
 function preload() {
 	titleFont = loadFont("./CyborgPunk.ttf");
 	subFont = loadFont("./goodtiming.otf");
@@ -32,6 +36,14 @@ function preload() {
 
 	lava.hide();
 
+	littleClick = loadSound("./clickLight.mp3");
+	click = loadSound("./clickElec.mp3");
+
+	introMusic = loadSound("./space.mp3");
+	buildMusic = loadSound("./electronic.mp3");
+	gameMusic = loadSound("./intense.mp3");
+
+	buildMusic.setVolume(0.1)
 }
 
 function setup() {
@@ -49,11 +61,12 @@ function setup() {
 	state4 = new State4();
 	state5 = new State5();
 
-	currentState = state3;
+	currentState = state1;
 }
 
 function draw() {
 	background(207, 21, 62);
+
 	currentState.draw();
 
 }

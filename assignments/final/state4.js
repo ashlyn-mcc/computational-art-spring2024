@@ -52,6 +52,7 @@ class State4{
 
     if (platformHeight <= 300){
         timeLasted = frameCount - this.startFrameCount
+        gameMusic.pause();
         currentState = state5;
     }
 

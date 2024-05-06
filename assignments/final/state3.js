@@ -13,13 +13,14 @@ class State3 {
         this.nextButtonHeight = 40;
         this.fade = 0;
         this.changeState = false;
-
         this.input = createInput("My Bot");
         this.input.position(0, 0);
+        this.input.hide()
     }
 
     draw() {
 
+        this.input.show();
         // update grid
         background((this.gridHue + 180) % 360, 76, 44);
         this.cellGrid.update();
@@ -100,6 +101,7 @@ class State3 {
             if (mouseIsPressed) {
                 this.changeState = true;
                 this.input.hide();
+                click.play()
             }
         } else {
             fill(235, 35, 26);
@@ -113,6 +115,9 @@ class State3 {
         }
 
         if (this.fade > 100) {
+            buildMusic.pause();
+            gameMusic.play();
+            this.input.hide();
             currentState = state4;
         }
     }
