@@ -1,3 +1,5 @@
+// The buttons used to change component selection in state 2
+
 class ComponentButtons {
     constructor(x, y, col, i) {
         this.color = col;

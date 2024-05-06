@@ -1,3 +1,5 @@
+// The head object used in states 3 and 4 once the selection process is done.
+
 class Head {
 
     constructor(x, y, col, i) {

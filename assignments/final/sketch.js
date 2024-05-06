@@ -1,3 +1,5 @@
+// Controls the state flow
+
 let currentState;
 
 let titleFont, subFont;
@@ -43,7 +45,7 @@ function preload() {
 	buildMusic = loadSound("./electronic.mp3");
 	gameMusic = loadSound("./intense.mp3");
 
-	buildMusic.setVolume(0.1)
+	buildMusic.setVolume(0.05)
 }
 
 function setup() {

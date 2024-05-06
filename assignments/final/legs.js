@@ -1,3 +1,6 @@
+// The legs object used in states 3 and 4 once the selection process is done.
+
+
 class Legs {
 
     constructor(x, y, col, i) {
@@ -8,11 +11,11 @@ class Legs {
 
     show() {
         push();
-        if (currentState != state3){
+        if (currentState != state3) {
             translate(this.position.x, this.position.y);
-            } else {
-                translate(400,550);
-            }
+        } else {
+            translate(400, 550);
+        }
         fill(20);
         ellipse(-45, -65, 40, 75)
         ellipse(45, -65, 40, 75)

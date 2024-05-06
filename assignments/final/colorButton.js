@@ -1,3 +1,5 @@
+// Button objects that change the color fo the robots components in State 2
+
 class ColorButton {
     constructor(x, y, size, color, index) {
         this.position = createVector(x, y);
@@ -26,11 +28,7 @@ class ColorButton {
             this.size = this.orignalSize
             return currentIndex;
         }
-        // if (mouseIsPressed && dist(mouseX, mouseY, this.position.x, this.position.y) < this.size / 2) {
-        //     return this.index;
-        // } else {
-        //     ;
-        // }
+       
     }
 
 }

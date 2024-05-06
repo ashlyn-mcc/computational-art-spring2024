@@ -1,3 +1,5 @@
+// Buttons to add a new component to the robot in state 2
+
 class addComponent {
     constructor() {
         this.x = 700;

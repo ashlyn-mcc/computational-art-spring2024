@@ -1,3 +1,5 @@
+// Arms displayed in the selection process in state2
+
 class SelectionArms {
     constructor(x, y) {
         this.position = createVector(x, y);

@@ -1,3 +1,5 @@
+// Body displayed in the selection process in state2
+
 class SelectionBody {
     constructor(x, y) {
         this.position = createVector(x, y);

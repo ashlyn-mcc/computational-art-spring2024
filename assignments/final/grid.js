@@ -1,3 +1,5 @@
+// Generates the moving grid background in state 3
+
 class gridGenerator {
     constructor(x, y, cellW, cellH, hue) {
 

@@ -1,4 +1,4 @@
-// Component Selection Screen
+// This state lets you select and customize your components
 
 class State2 {
     constructor() {
@@ -12,7 +12,7 @@ class State2 {
         this.numComponent = 0;
         this.buttonUnderMouse = 0;
 
-        this.nextButtonPosition = createVector(700,670);
+        this.nextButtonPosition = createVector(700, 670);
         this.nextButtonWidth = 125;
         this.nextButtonHeight = 40;
         this.fade = 0;
@@ -124,22 +124,22 @@ class State2 {
         }
 
         let numParts = 0;
-        for (let i = 0; i < 4; i++){
-            if (parts[i] != null){
+        for (let i = 0; i < 4; i++) {
+            if (parts[i] != null) {
                 numParts += 1
             }
         }
 
 
-        if (numParts == 4){
-        this.isButtonClicked();
-        this.changeStateButton();
-        if (this.changeState){
-        this.nextState();
+        if (numParts == 4) {
+            this.isButtonClicked();
+            this.changeStateButton();
+            if (this.changeState) {
+                this.nextState();
+            }
+            fill(0, this.fade);
+            rect(width / 2, height / 2, width, height);
         }
-        fill(0,this.fade);
-        rect(width/2,height/2,width,height);
-    }
     }
 
     overButtons() {
@@ -231,9 +231,9 @@ class State2 {
         }
     }
 
-    changeStateButton(){
+    changeStateButton() {
         console.log("entered")
-        rect(this.nextButtonPosition.x,this.nextButtonPosition.y,this.nextButtonWidth,this.nextButtonHeight,5);
+        rect(this.nextButtonPosition.x, this.nextButtonPosition.y, this.nextButtonWidth, this.nextButtonHeight, 5);
         fill(235, 35, 26);
         textFont(subFont);
         strokeWeight(0.5);
@@ -252,10 +252,10 @@ class State2 {
             mouseX < this.nextButtonPosition.x + xBound &&
             mouseY > this.nextButtonPosition.y - yBound &&
             mouseY < this.nextButtonPosition.y + yBound) {
-                fill(81, 28, 89);
-            if (mouseIsPressed){
+            fill(81, 28, 89);
+            if (mouseIsPressed) {
                 click.play();
-            this.changeState = true;
+                this.changeState = true;
             }
         } else {
             fill(27, 70, 65)

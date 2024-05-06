@@ -1,3 +1,5 @@
+// The body object used in states 3 and 4 once the selection process is done.
+
 class Body {
 
     constructor(x, y, col, i) {
@@ -8,11 +10,11 @@ class Body {
 
     show() {
         push();
-        if (currentState != state3){
+        if (currentState != state3) {
             translate(this.position.x, this.position.y);
-            } else {
-                translate(400,400);
-            }
+        } else {
+            translate(400, 400);
+        }
         scale(0.75)
         fill(20);
         ellipse(120, -110, 75, 75);

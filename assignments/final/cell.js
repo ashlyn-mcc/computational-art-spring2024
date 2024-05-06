@@ -1,3 +1,4 @@
+// Draws the cells for the grid in State 3
 
 class Cell {
 

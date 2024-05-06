@@ -1,4 +1,6 @@
-// Detail & power up selection screen
+// This state lets your view the robot and name it
+
+let robotName = 'your bot'
 
 class State3 {
     constructor() {
@@ -59,17 +61,17 @@ class State3 {
         if (this.changeState) {
             this.nextState();
         }
-        
+
 
         push();
         strokeWeight(5);
         stroke(100);
-        line(60,55,60,30)
-        line(60,30,45,40)
-        line(60,30,75,40)
+        line(60, 55, 60, 30)
+        line(60, 30, 45, 40)
+        line(60, 30, 75, 40)
         pop();
         fill(100);
-        text("Give your bot \n a name",60,75);
+        text("Give your bot \n a name", 60, 75);
 
         fill(0, this.fade);
         rect(width / 2, height / 2, width, height)
@@ -117,6 +119,7 @@ class State3 {
         if (this.fade > 100) {
             buildMusic.pause();
             gameMusic.play();
+            robotName = this.input.value();
             this.input.hide();
             currentState = state4;
         }

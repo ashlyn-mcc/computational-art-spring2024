@@ -1,9 +1,4 @@
-// Home Screen
-
-// Display Text
-// Start button to go to next stage
-// Intro Music????
-
+// The home screen
 
 class State1 {
     constructor() {
@@ -24,11 +19,11 @@ class State1 {
         textFont(titleFont);
         textSize(60);
         fill(20);
-        text("ROBOT BUILDER", this.titlePosition.x + 3, this.titlePosition.y + 3);
+        text("ROBOT LABORATORY", this.titlePosition.x + 3, this.titlePosition.y + 3);
         strokeWeight(1);
         stroke(0);
         fill(27, 70, 65);
-        text("ROBOT BUILDER", this.titlePosition.x, this.titlePosition.y);
+        text("ROBOT LABORATORY", this.titlePosition.x, this.titlePosition.y);
         noStroke();
 
 
@@ -90,9 +85,9 @@ class State1 {
             mouseY > this.buttonPosition.y - yBound &&
             mouseY < this.buttonPosition.y + yBound) {
             fill(81, 28, 89)
-            if (mouseIsPressed){
-            this.changeState = true;
-            click.play()
+            if (mouseIsPressed) {
+                this.changeState = true;
+                click.play()
             }
         } else {
             fill(235, 35, 26);

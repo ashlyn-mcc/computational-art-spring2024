@@ -1,3 +1,6 @@
+// The arms object used in states 3 and 4 once the selection process is done.
+
+
 class Arms {
 
     constructor(x, y, col, i) {

@@ -1,3 +1,5 @@
+// Head displayed in the selection process in state2
+
 class SelectionHead {
     constructor(x, y) {
         this.position = createVector(x, y);
