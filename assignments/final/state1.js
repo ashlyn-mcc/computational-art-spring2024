@@ -8,8 +8,9 @@ class State1 {
         this.buttonHeight = 40;
         this.fade = 0;
         this.changeState = false;
-
+        userStartAudio();
         buildMusic.play();
+
     }
 
     draw() {
@@ -17,7 +18,7 @@ class State1 {
 
         // title
         textFont(titleFont);
-        textSize(60);
+        textSize(50);
         fill(20);
         text("ROBOT LABORATORY", this.titlePosition.x + 3, this.titlePosition.y + 3);
         strokeWeight(1);
