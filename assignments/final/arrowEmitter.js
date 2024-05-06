@@ -7,7 +7,7 @@ class ArrowEmitter {
     }
 
     update() {
-        if (frameCount % 20 == 0) {
+        if (frameCount % 18 == 0) {
             this.arrows.push(new Arrow(this.position.x, this.position.y));
         }
 

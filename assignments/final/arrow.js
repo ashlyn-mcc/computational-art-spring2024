@@ -13,7 +13,7 @@ class Arrow {
         this.inRange = false;
         this.after = false;
 
-        this.speed = 4
+        this.speed = 4.5
 
         this.hit = false;
 
