@@ -1,3 +1,5 @@
+let pastArrows = 0;
+
 class Arrow{
     constructor(x,y){
         this.position = createVector(x,y);
@@ -9,13 +11,16 @@ class Arrow{
         this.inRange = false;
         this.after = false;
 
-        this.speed = 1
+        this.speed = 4
 
         this.hit = false;
         
-        this.hue = 100;
+        this.hue = random(150,250);
+        this.bright = 80;
+        this.sat = 0;
 
         this.active = true;
+        this.alpha = 100;
     }
 
     keyPressed(){
@@ -38,7 +43,7 @@ class Arrow{
         translate(this.position.x,this.position.y);
         rotate(this.rotation)
         strokeWeight(5);
-        stroke(this.hue);
+        stroke(this.hue,this.sat,this.bright,this.alpha);
         line(-15,0,15,0);
         line(15,0,0,-15);
         line(15,0,0,15);
@@ -56,9 +61,16 @@ class Arrow{
 
         if (this.hit === false && this.after === true && this.active == true){
             this.hue = 0;
-            platformHeight -= 20
+            platformHeight -= 40
+            this.active = false;
+            this.sat = 75
+        } else if (this.after === true && this.hit === true && this.active == true){
+            this.hue = 100;
+            this.sat = 75
+            pastArrows += 1
             this.active = false;
         }
+
 
     }
 

@@ -1,9 +1,15 @@
 // Game Screen
+let timeLasted = 0;
+
+let emitScale = 1;
 
 class State4{
     constructor(){
         this.platform = new Platform();
         this.arrowEmitter = new ArrowEmitter();
+
+        this.startFrameCount = frameCount;
+        console.log(frameCount)
     }
 
     draw(){
@@ -21,7 +27,7 @@ class State4{
 
     for (let i = 0; i < parts.length; i++) {
         push();
-        translate(350, 300);
+        translate(365, platformHeight/-2 + 550);
         scale(0.2);
         strokeWeight(5);
         stroke(0);
@@ -44,8 +50,12 @@ class State4{
     ellipse(width/2,35,70,70)
     pop();
 
-   
+    if (platformHeight <= 300){
+        timeLasted = frameCount - this.startFrameCount
+        currentState = state5;
+    }
 
+    emitScale = emitScale + 0.001
     }
 
     

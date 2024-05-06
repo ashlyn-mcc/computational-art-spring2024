@@ -4,7 +4,7 @@ let titleFont, subFont;
 
 let wrenchPic, gearPic;
 
-let state1, state2, state3, state4;
+let state1, state2, state3, state4, state5;
 
 let headPic, bodyPic, armPic, legPic;
 
@@ -47,7 +47,9 @@ function setup() {
 	state2 = new State2();
 	state3 = new State3();
 	state4 = new State4();
-	currentState = state4;
+	state5 = new State5();
+
+	currentState = state3;
 }
 
 function draw() {

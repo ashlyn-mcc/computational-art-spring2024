@@ -13,6 +13,9 @@ class State3 {
         this.nextButtonHeight = 40;
         this.fade = 0;
         this.changeState = false;
+
+        this.input = createInput("My Bot");
+        this.input.position(0, 0);
     }
 
     draw() {
@@ -48,13 +51,25 @@ class State3 {
         stroke(0);
         textFont(titleFont);
         textSize(75);
-        text("YOUR BOT", width / 2, 75);
+        text(this.input.value(), width / 2, 75);
 
         this.isButtonClicked();
         this.nextStateButton()
         if (this.changeState) {
             this.nextState();
         }
+        
+
+        push();
+        strokeWeight(5);
+        stroke(100);
+        line(60,55,60,30)
+        line(60,30,45,40)
+        line(60,30,75,40)
+        pop();
+        fill(100);
+        text("Give your bot \n a name",60,75);
+
         fill(0, this.fade);
         rect(width / 2, height / 2, width, height)
     }
@@ -68,7 +83,7 @@ class State3 {
         strokeWeight(1);
         textSize(15);
         textFont(subFont);
-        text("Prepare for battle", this.nextButtonPosition.x, this.nextButtonPosition.y);
+        text("Test Your Skills", this.nextButtonPosition.x, this.nextButtonPosition.y);
     }
 
     // Checks if the mouse was over the button when it clicked
@@ -84,6 +99,7 @@ class State3 {
             fill(81, 28, 89);
             if (mouseIsPressed) {
                 this.changeState = true;
+                this.input.hide();
             }
         } else {
             fill(235, 35, 26);
